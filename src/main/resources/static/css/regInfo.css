@@ -1,0 +1,403 @@
+  
+
+            .admissions {
+                background-color: #ffffff;
+                width: 100%;
+                flex-grow: 1;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+           
+
+            /* 입학 절차 스타일 */
+            .admissions-container {
+                width: 100%;
+                max-width: 1200px;
+                margin-bottom: 40px;
+                background-color: #ffffff;
+            }
+
+            .admissions-header {
+                font-family: "Roboto", "Noto Sans KR", sans-serif;
+                font-weight: 500;
+                font-size: 3rem;
+                letter-spacing: 0.1em;
+                text-align: center;
+                padding: 40px 0;
+                position: relative;
+                overflow: hidden;
+                color: #333;
+                padding-bottom: 45px;
+                
+            }
+            .admissions-header > span {
+                color: #4CAF50;
+            }
+
+           
+
+           
+
+            .steps-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                flex-wrap: nowrap;
+            }
+
+            .step {
+                position: relative;
+                width: 200px;
+                transition: all 0.5s ease;
+                animation: fadeIn 0.8s ease forwards;
+                opacity: 0;
+            }
+
+            .step-content {
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+                padding: 20px 10px;
+                text-align: center;
+                height: 180px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.5s ease 0s;
+                position: relative;
+                overflow: hidden;
+                border-left: 5px solid #4CAF50;
+            }
+
+            .step:hover .step-content {
+                background-color: #4CAF50;
+                color: #ffffff;
+                box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+                transform: translateY(-5px);
+            }
+
+            .step:hover .step-number {
+                background: #ffffff;
+                color: #4CAF50;
+            }
+
+            .step:hover .card-icon {
+                color: #ffffff;
+                -webkit-text-fill-color: #ffffff;
+            }
+
+            .step:hover h3 {
+                color: #ffffff;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                background: #f2f2f2;
+                border-radius: 50%;
+                color: #4CAF50;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 15px;
+                transition: all 0.5s ease 0s;
+            }
+
+            .step h3 {
+                color: #200000;
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 10px;
+                transition: all 0.5s ease 0s;
+            }
+
+            .arrow {
+                display: flex;
+                align-items: center;
+                color: #4CAF50;
+                font-size: 24px;
+                transition: all 0.5s ease 0s;
+                flex-shrink: 0;
+                animation: fadeIn 0.8s ease forwards;
+                opacity: 0;
+            }
+
+            .card-icon {
+                font-size: 32px;
+                margin-bottom: 15px;
+                color: #4CAF50;
+                transition: all 0.5s ease 0s;
+            }
+
+            .step:nth-child(1) {
+                animation-delay: 0.2s;
+            }
+
+            .step:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+
+            .step:nth-child(5) {
+                animation-delay: 0.6s;
+            }
+
+            .step:nth-child(7) {
+                animation-delay: 0.8s;
+            }
+
+            .arrow:nth-child(2) {
+                animation-delay: 0.3s;
+            }
+
+            .arrow:nth-child(4) {
+                animation-delay: 0.5s;
+            }
+
+            .arrow:nth-child(6) {
+                animation-delay: 0.7s;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .data-flow {
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                background-color: rgba(76, 175, 80, 0.7);
+                border-radius: 50%;
+                left: -8px;
+                top: 50%;
+                animation: flowRight 3s infinite ease-in-out;
+                opacity: 0;
+            }
+
+            @keyframes flowRight {
+                0% {
+                    left: -8px;
+                    opacity: 0;
+                }
+
+                10% {
+                    opacity: 1;
+                }
+
+                90% {
+                    opacity: 1;
+                }
+
+                100% {
+                    left: calc(100% + 8px);
+                    opacity: 0;
+                }
+            }
+
+            .step:nth-child(1) .data-flow {
+                animation-delay: 0s;
+            }
+
+            .step:nth-child(3) .data-flow {
+                animation-delay: 1s;
+            }
+
+            .step:nth-child(5) .data-flow {
+                animation-delay: 2s;
+            }
+
+            .step:nth-child(7) .data-flow {
+                animation-delay: 3s;
+            }
+
+            
+
+
+            .rc-container {
+                font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+                /* max-width: 800px; */
+                width: 100%;
+                margin: 0 auto;
+                padding: 30px;
+                background: #f8f9fa;
+                color: #333;
+
+            }
+
+            .rc-title {
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 25px;
+                padding-bottom: 15px;
+                border-bottom: 2px solid #4CAF50;
+                color: #333;
+                text-align: center;
+            }
+
+            .rc-section {
+                margin-bottom: 25px;
+            }
+
+            .rc-section:last-child {
+                margin-bottom: 0;
+            }
+
+            .rc-section-title {
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                background-color: #edf7ed;
+                padding: 10px 15px;
+                border-radius: 6px;
+                color: #3e8e41;
+                border-left: 4px solid #4CAF50;
+            }
+
+            .rc-item {
+                margin-bottom: 12px;
+                line-height: 1.6;
+                display: flex;
+                align-items: flex-start;
+                transition: transform 0.2s ease;
+            }
+
+            .rc-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .rc-item:before {
+                content: "▶";
+                color: #4CAF50;
+                margin-right: 10px;
+                flex-shrink: 0;
+                font-size: 12px;
+            }
+
+            .rc-content {
+                flex: 1;
+                font-size: 16px;
+            }
+
+            /* Responsive design */
+            @media only screen and (max-width: 768px) {
+                .rc-container {
+                    padding: 20px;
+                    max-width: 95%;
+                }
+
+                .rc-title {
+                    font-size: 20px;
+                }
+
+                .rc-section-title {
+                    font-size: 16px;
+                }
+
+                .rc-content {
+                    font-size: 14px;
+                }
+            }
+
+            .map-container {
+                width: 100%;
+                max-width: 1200px;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin-top: 20px;
+            }
+
+            .map-container h2 {
+                font-size: 24px;
+                color: #333;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .map-placeholder {
+                width: 100%;
+                height: 400px;
+                background-color: #e9ecef;
+                border-radius: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #6c757d;
+                font-size: 18px;
+            }
+
+            .address-info {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .address-info p {
+                margin-bottom: 10px;
+                color: #555;
+            }
+
+            .address-info .highlight {
+                color: #4CAF50;
+                font-weight: 500;
+            }
+
+            /* 반응형 조정 */
+            @media only screen and (max-width: 900px) {
+                .steps-container {
+                    flex-direction: column;
+                }
+
+                .arrow {
+                    transform: rotate(90deg);
+                    margin: 10px 0;
+                }
+
+                .step {
+                    width: 220px;
+                }
+
+                .step-content {
+                    height: 200px;
+                }
+            }
+             .mapTop {
+                background-color: #ffffff;
+                font-family: "Roboto", "Noto Sans KR", sans-serif;
+                font-weight: 500;
+                font-size: 3rem;
+                letter-spacing: 0.1em;
+                text-align: center;
+                padding: 40px 0;
+                position: relative;
+                overflow: hidden;
+                color: #333;
+                padding-bottom: 45px;
+            }
+
+            .mapTop > span {
+                color: #4CAF50;
+            }
+             .mapInfo {
+                background-color: #ffffff;
+                width: 100%;
+                flex-grow: 1;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }

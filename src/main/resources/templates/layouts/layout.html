@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+   
+
+    <head th:replace="~{/fragments/config :: ConfigFragment}">
+        <title>중앙능력개발원</title>
+    </head>
+
+    <body>
+        <div class="wrap">
+            <header th:replace="~{/fragments/header :: HeaderFragment}"></header>
+            <th:block th:replace="${bannerType == 'default1'} ? ~{/fragments/banner1 :: BannerFragment} : _"></th:block>
+			<th:block th:replace="${bannerType == 'default2'} ? ~{/fragments/banner2 :: BannerFragment} : _"></th:block>
+			
+            
+            <th:block layout:fragment="Content"></th:block>
+            <footer th:replace="~{/fragments/footer :: FooterFragment}"></footer>
+        </div>
+		
+        <script>
+        
+
+
+
+
+        </script>
+    </body>
+
+</html>

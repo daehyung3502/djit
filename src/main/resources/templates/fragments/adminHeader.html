@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:fragment="HeaderFragment">
+    <link rel="stylesheet" th:href="@{/css/adminHeader.css}">
+    <header class="header">
+        <div class="d-flex align-items-center">
+            <div class="header-title">
+                <i class="fas fa-school"></i>
+                중앙능력개발원 관리자 페이지
+            </div>
+        </div>
+        <a href="/admin/logout" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            로그아웃
+        </a>
+    </header>
+</html>

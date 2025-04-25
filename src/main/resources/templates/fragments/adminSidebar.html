@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:fragment="SidebarFragment">
+    <link rel="stylesheet" th:href="@{/css/adminSidebar.css}">
+    <aside class="sidebar" id="sidebar" >
+        <nav>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="/admin/list" class="sidebar-nav-link">
+                        <i class="fas fa-users"></i> 지원자 목록
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/admin/calendar" class="sidebar-nav-link" >
+                        <i class="fas fa-calendar-alt"></i> 예약 캘린더
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/admin/courseModify" class="sidebar-nav-link" >
+                        <i class="fas fa-graduation-cap"></i> 교육과정 수정
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const currentPath = window.location.pathname;
+                const menuLinks = document.querySelectorAll('.sidebar-nav-link');
+                
+                menuLinks.forEach(link => {
+                    if (link.getAttribute('href') !== '#' && currentPath.includes(link.getAttribute('href'))) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        </script>
+    </aside>
+</html>

@@ -1,0 +1,44 @@
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--card-bg);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    height: calc(100vh - var(--header-height));
+    z-index: 100;
+    padding-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav-item {
+    margin-bottom: 5px;
+}
+
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-nav-link:hover, .sidebar-nav-link.active {
+    background-color: rgba(53, 99, 233, 0.08);
+    border-left-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.sidebar-nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}

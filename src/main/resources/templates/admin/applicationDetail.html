@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/adminLayout}" layout:fragment="Content">
+
+    <head>
+        <title>지원서 상세 정보</title>
+        <link rel="stylesheet" th:href="@{/css/applicationDetail.css}">
+    </head>
+
+    <body>
+        <div class="container" th:if="${applicationResponseDto}">
+            <div class="headerdetail">
+                <h1>지원서 상세 정보
+                    <span
+                        class="badge"
+                        th:classappend="${applicationResponseDto.consultation?.number != null ? 'badge-scheduled' : 'badge-pending'}"
+                        th:text="${applicationResponseDto.consultation?.number != null ? '상담 예약 완료' : '상담 대기 중'}" />
+                </h1>
+                <div class="subtitle" th:text="${applicationResponseDto.subjectName}" />
+            </div>
+
+            <div class="content">
+              
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user"></i>
+                        지원자 정보</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">지원 번호</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.number}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">이름</span>
+                            <div class="detail-value" id="name" th:text="${applicationResponseDto.name}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">이메일</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.email}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">성별</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.sex}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">생년월일</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.birth}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">연락처</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.phoneNumber}" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 추가 정보 섹션 -->
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        추가 정보</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">주소</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.address}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">최종 학력</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.educationLevel}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">결혼 여부</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.married}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">고용 보험 가입 여부</span>
+                            <div
+                                class="detail-value"
+                                th:text="${applicationResponseDto.employmentInsurance}" />
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">교육 목표</span>
+                            <div class="detail-value" th:text="${applicationResponseDto.educationGoal}" />
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-comment-alt"></i>
+                        지원 동기</h3>
+                    <div class="card">
+                        <div class="detail-value" th:text="${applicationResponseDto.motivation}" />
+                    </div>
+                </div>
+
+              
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-sticky-note"></i>
+                        비고</h3>
+                    <div class="card">
+                        <div class="detail-value" th:text="${applicationResponseDto.note}" />
+                    </div>
+                </div>
+
+              
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-calendar-check"></i>
+                        상담 정보</h3>
+                    <div class="details-grid">
+                        <div class="detail-item full-width">
+                            <span class="detail-label">상담 일시</span>
+                            <div
+                                class="detail-value"
+                                id="consultationDisplay"
+                                th:text="${applicationResponseDto.consultation?.number != null ? applicationResponseDto.consultation.consultationDateTimeStr : '미정'}" />
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="timestamp">
+                    <div>
+                        <span class="label">지원 일시</span>
+                        <span
+                            th:text="${applicationResponseDto.createdAt != null ? #temporals.format(applicationResponseDto.createdAt, 'yyyy-MM-dd HH:mm:ss') : '-'}" />
+                    </div>
+                    <div>
+                        <span class="label">최종 수정 일시</span>
+                        <span
+                            th:text="${applicationResponseDto.updatedAt != null ? #temporals.format(applicationResponseDto.updatedAt, 'yyyy-MM-dd HH:mm:ss') : '-'}" />
+                    </div>
+                </div>
+                
+              
+                <div class="button-container">
+                    <a th:href="@{/admin/applicationModify/{number}(number=${applicationResponseDto.number}, page=${pageable.pageNumber})}">
+                        <button id="modifyBtn" type="button" class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                            지원서 수정
+                        </button>
+                    </a>   
+                    <button id="scheduleBtn" type="button" class="btn btn-primary" th:with="hasConsultation=${applicationResponseDto.consultation?.number != null}">
+                        <i th:class="'fas ' + (${hasConsultation} ? 'fa-calendar-alt' : 'fa-calendar-plus')"></i>
+                        [[${hasConsultation ? '상담 시간 수정' : '상담 예약'}]]
+                    </button>
+                    <a th:href="@{/admin/list(page=${pageable.pageNumber})}" class="btn btn-secondary">
+                        <i class="fas fa-list"></i>
+                        목록으로 돌아가기
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div
+            th:unless="${applicationResponseDto}"
+            class="container"
+            style="text-align: center;">
+            <div class="content">
+                <div style="padding: 40px 0;">
+                    <i
+                        class="fas fa-exclamation-circle"
+                        style="font-size: 50px; color: #EF4444; margin-bottom: 20px;"></i>
+                    <h1 style="margin-bottom: 15px;">오류</h1>
+                    <p style="margin-bottom: 30px;">지원서 정보를 찾을 수 없습니다.</p>
+                    <div class="button-container" style="justify-content: center;">
+                        <a
+                            th:href="@{/admin/list(page=${pageable.pageNumber})}"
+                            class="btn btn-secondary">
+                            <i class="fas fa-list"></i>
+                            목록으로 돌아가기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="consultationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 th:if="${applicationResponseDto.consultation?.number == null}">상담 예약</h2>
+                    <h2 th:if="${applicationResponseDto.consultation?.number != null}">상담 시간 수정</h2>
+                    <span class="close-button">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="consultationForm">
+                        <input
+                            type="hidden"
+                            id="number"
+                            name="number"
+                            th:value="${applicationResponseDto?.number}">
+
+                        <div class="form-group">
+                            <label for="consultationDate">상담 날짜</label>
+                            <input
+                                type="date"
+                                id="consultationDate"
+                                name="consultationDate"
+                                class="form-control"
+                                required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="consultationTime">상담 시간</label>
+                            <input
+                                type="time"
+                                id="consultationTime"
+                                name="consultationTime"
+                                class="form-control"
+                                required="required">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        th:if="${applicationResponseDto.consultation?.number != null}"
+                        id="deleteBtn"
+                        type="button"
+                        class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        예약 취소
+                    </button>
+                    <button type="button" id="cancelConsultationBtn" class="btn btn-secondary">
+                        <i class="fas fa-times"></i>
+                        취소
+                    </button>
+                    <button type="button" id="confirmConsultationBtn" class="btn btn-primary">
+                        <i class="fas fa-check"></i>
+                        <span th:text="${applicationResponseDto.consultation?.number == null ? '예약 확정' : '예약 수정'}"></span>
+                    </button>
+                </div>
+            </div>
+            <input id="consultationNumber" th:value="${applicationResponseDto.consultation?.number}" />
+        </div>
+
+        <script th:inline="javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                
+                const consultationNumber = document.getElementById("consultationNumber").value;
+              
+                let modal = document.getElementById("consultationModal");
+                let scheduleBtn = document.getElementById("scheduleBtn");
+                let closeBtn = modal.querySelector(".close-button");
+                let cancelBtn = document.getElementById("cancelConsultationBtn");
+                let confirmBtn = document.getElementById("confirmConsultationBtn");
+                let deleteBtn = document.getElementById("deleteBtn");
+                let dateInput = document.getElementById("consultationDate");
+                let timeInput = document.getElementById("consultationTime");
+                let applicationName = document.getElementById("name");
+                let displayText = null;
+
+                function openModal() {
+                    displayText = document
+                        .getElementById('consultationDisplay')
+                        .textContent
+                        .trim();
+                    const today = new Date();
+                    const year = today.getFullYear();
+                    const month = String(today.getMonth() + 1).padStart(2, '0');
+                    const day = String(today.getDate()).padStart(2, '0');
+                    const todayFormatted = `${year}-${month}-${day}`;
+                    dateInput.setAttribute('min', todayFormatted);
+                    if (displayText !== '미정') {
+                        const [date, time] = displayText.split(' ');
+                        dateInput.value = date;
+                        timeInput.value = time;
+                    } else {
+                        dateInput.value = '';
+                        timeInput.value = '';
+                    }
+                    modal.style.display = "flex";
+                }
+
+                function closeModal() {
+                    modal.style.display = "none";
+                }
+
+                if (scheduleBtn) {
+                    scheduleBtn.onclick = openModal;
+                }
+
+                if (closeBtn) {
+                    closeBtn.onclick = closeModal;
+                }
+
+                if (cancelBtn) {
+                    cancelBtn.onclick = closeModal;
+                }
+
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        closeModal();
+                    }
+                }
+
+                if (confirmBtn) {
+                    confirmBtn.onclick = function () {
+                        let selectedDate = dateInput.value;
+                        let selectedTime = timeInput.value;
+                        let appName = applicationName.textContent;
+
+                        if (!selectedDate || !selectedTime) {
+                            alert("상담 날짜와 시간을 모두 선택해주세요.");
+                            return;
+                        }
+
+                        const newDateTime = `${selectedDate} ${selectedTime}`;
+                        if (displayText === newDateTime) {
+                            alert("변경된 상담 날짜와 시간이 이전과 같습니다.");
+                            return;
+                        }
+
+                        let consultationDateTimeString = selectedDate + "T" + selectedTime;
+
+                        console.log("보낼 데이터:", {
+                            name: appName,
+                            consultationDateTime: consultationDateTimeString
+                        });
+
+                        fetch('/admin/consultation', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                number: document
+                                    .getElementById('number')
+                                    .value,
+                                name: appName,
+                                consultationDateTime: consultationDateTimeString
+                            })
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('네트워크 응답이 올바르지 않습니다.');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log('성공:', data);
+                                if (consultationNumber) 
+                                    alert(
+                                        `상담이 성공적으로 변경되었습니다.\n이름: ${appName}\n날짜: ${selectedDate}\n시간: ${selectedTime}`
+                                    );
+                                else 
+                                    alert(
+                                        `상담이 성공적으로 예약되었습니다.\n이름: ${appName}\n날짜: ${selectedDate}\n시간: ${selectedTime}`
+                                    );
+                                window
+                                    .location
+                                    .reload();
+                                const displayElement = document.getElementById('consultationDisplay');
+                                if (displayElement && data.consultationDateTimeStr) {
+                                    displayElement.textContent = data.consultationDateTimeStr;
+                                } else {
+                                    displayElement.textContent = '미정';
+                                }
+                                const scheduleButton = document.getElementById('scheduleBtn');
+                                if (scheduleButton) {
+                                    scheduleButton.textContent = '상담 시간 수정';
+                                }
+                            })
+                            .catch((error) => {
+                                console.error('오류:', error);
+                                alert('상담 예약 중 오류가 발생했습니다.');
+                            });
+                    }
+                }
+
+                if (deleteBtn) {
+                    deleteBtn.onclick = () => {
+                        if (consultationNumber) {
+                            if (confirm("정말로 상담 예약을 취소하시겠습니까?")) {
+                                
+                                fetch(`/admin/consultation/${encodeURIComponent(consultationNumber)}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('네트워크 응답이 올바르지 않습니다.');
+                                        }
+                                        return response;
+                                    })
+                                    .then(() => {
+                                        alert("예약이 취소되었습니다.");
+                                        window
+                                            .location
+                                            .reload();
+                                    })
+                                    .catch((error) => {
+                                        alert('예약 취소 중 오류가 발생했습니다.');
+                                    });
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+:root {
+    --primary-color: #4CAF50;
+    --primary-hover: #367c39;
+    --secondary-color: #3563E9;
+    --danger-color: #DC3545;
+    --danger-hover: #BB2D3B;
+    --text-primary: #1E293B;
+    --text-secondary: #4B5563;
+    --bg-color: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --border-color: #E5E7EB;
+    --sidebar-width: 250px;
+    --header-height: 60px;
+    --font-sans: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}     
+
+
+
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+    margin-top: var(--header-height);
+    width: calc(100% - var(--sidebar-width));
+    min-height: calc(100vh - var(--header-height));
+    transition: all 0.3s ease;
+}

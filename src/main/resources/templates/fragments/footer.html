@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+lang="en"
+xmlns:th="http://www.thymeleaf.org"
+th:fragment="FooterFragment">
+<footer>
+<div class="footer">
+<div class="footer-content">
+<div class="footer-section about">
+<h2 class="logo-text">
+<span>중앙</span>능력개발원
+</h2>
+<p>
+대전 IT 교육의 중심, 중앙능력개발원에서 미래를 위한 최고의 IT 교육을 경험하세요.
+</p>
+<div class="contact">
+<span>
+<i class="fa fa-phone"></i>
+042-254-2462</span>
+<span>
+<i class="fa fa-envelope"></i>
+info@djit21.co.kr</span>
+</div>
+<div class="socials">
+<a href="#">
+<i class="fa fa-facebook"></i>
+</a>
+<a href="#">
+<i class="fa fa-instagram"></i>
+</a>
+<a href="#">
+<i class="fa fa-twitter"></i>
+</a>
+<a href="#">
+<i class="fa fa-youtube"></i>
+</a>
+</div>
+</div>
+
+<div class="footer-section links">
+<h2>바로가기</h2>
+<ul>
+<li>
+<a th:href="@{/pages/intro}">교육원소개</a>
+</li>
+<li>
+<a th:href="@{/pages/course}">교육과정</a>
+</li>
+<li>
+<a th:href="@{/pages/regInfo}">입학안내</a>
+</li>
+<li>
+<a th:href="@{/pages/emp}">취업정보</a>
+</li>
+<li>
+<a th:href="@{/pages/regApp}">온라인접수</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="footer-bottom">
+<p>
+<a href="#">개인정보처리방침</a>
+|
+<a href="#">이메일무단수집거부</a>
+| Copyright © 2025 중앙능력개발원 | All Rights Reserved
+</p>
+<p>
+대전광역시 서구 둔산서로 17 양호빌딩 6층 | 대표: 김기화 | 사업자번호 : 305-82-61820
+</p>
+</div>
+</div>
+</footer>
+</html>

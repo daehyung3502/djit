@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
+
+
+    <head>
+        <title>온라인접수</title>
+        <link rel="stylesheet" th:href="@{/css/regApp.css}">
+    </head>
+
+    <body>
+        
+            <div class="form-container">
+                <div class="form-title"><h1>온라인 접수</h1></div>
+            
+                <form id="applicationForm" th:action="@{/application}" method="post">  
+            
+                    <div class="form-group">
+                        <label class="form-label" for="subjectName">지원과정 <span class="required-asterisk">*</span></label>
+                         <select id="subjectName" name="subjectName" required>
+                            <option value="" disabled selected>과정을 선택하세요</option> 
+                            <option value="클라우드기반 풀스택 개발 및 빅데이터 분석서비스 구현을 위한 전문가 양성과정">클라우드기반 풀스택 개발 및 빅데이터 분석서비스 구현을 위한 전문가 양성과정</option>
+                            <option value="풀 스택 SW 엔지니어링 & 디지털 트랜스포메이션 과정">풀 스택 SW 엔지니어링 &amp; 디지털 트랜스포메이션 과정</option>
+                        </select>
+                    </div>
+            
+                    <div class="form-group">
+                        <label class="form-label" for="name">이름 <span class="required-asterisk">*</span></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label class="form-label" for="email">이메일 <span class="required-asterisk">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                     <div class="form-group">
+                        <label class="form-label">성별 <span class="required-asterisk">*</span></label>
+                        <div class="radio-group">
+                            <input type="radio" id="male" name="sex" value="남" required>
+                            <label class="form-label" for="male">남</label>
+                            <input type="radio" id="female" name="sex" value="여" required>
+                            <label class="form-label" for="female">여</label>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label class="form-label" for="birth">생년월일 <span class="required-asterisk">*</span></label>
+                        <input type="text" id="birth" name="birth" placeholder="ex. 2001-08-15" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label class="form-label" for="phoneNumber">휴대폰 <span class="required-asterisk">*</span></label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label class="form-label" for="address">주소 <span class="required-asterisk">*</span></label>
+                        <input type="text" id="address" name="address" placeholder="구 동 까지만" required>
+                    </div>
+                    
+                      <div class="form-group">
+                        <label class="form-label" for="educationLevel">최종학력 <span class="required-asterisk">*</span></label>
+                         <select id="educationLevel" name="educationLevel" required>
+                            <option value="" disabled selected>학력을 선택하세요</option> 
+                            <option value="고등학교 졸업">고등학교 졸업</option>
+                            <option value="전문대 재학">전문대 재학</option>
+                            <option value="전문대 졸업">전문대 졸업</option>
+                            <option value="4년제 대학 재학 (학사)">4년제 대학 재학 (학사)</option>
+                            <option value="4년제 대학 졸업 (학사)">4년제 대학 졸업 (학사)</option>
+                            <option value="대학원 졸업 (석사)">대학원 졸업 (석사)</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                    
+            
+                    <div class="form-group">
+                        <label class="form-label">결혼유무 <span class="required-asterisk">*</span></label>
+                        <div class="radio-group">
+                            <input type="radio" id="married" name="married" value="기혼" required>
+                            <label class="form-label" for="married">기혼</label>
+                            <input type="radio" id="single" name="married" value="미혼" required>
+                            <label class="form-label" for="single">미혼</label>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label class="form-label">고용보험가입 <span class="required-asterisk">*</span></label>
+                        <div class="radio-group">
+                            <input type="radio" id="employed" name="employmentInsurance" value="유" required>
+                            <label class="form-label" for="employed">유</label>
+                            <input type="radio" id="unemployed" name="employmentInsurance" value="무" required>
+                            <label class="form-label" for="unemployed">무</label>
+                        </div>
+                    </div>
+            
+                     <div class="form-group">
+                        <label class="form-label" for="educationGoal">교육목표 <span class="required-asterisk">*</span></label>
+                         <select id="educationGoal" name="educationGoal" required>
+                            <option value="" disabled selected>교육목표를 선택하세요</option> 
+                            <option value="취업 및 자격증">취업 및 자격증</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+            
+            
+                    <div class="form-group">
+                        <label class="form-label" for="motivation">지원동기 및 수료 후 계획</label>
+                        <textarea id="motivation" name="motivation" rows="5"></textarea>
+                    </div>
+                    
+                      <button type="submit" class="submit-button"> <i class="fa fa-paper-plane"></i>  제출하기</button>
+            
+                </form>
+            </div>
+           	<script th:src="@{/js/regApptest.js}"></script>
+            
+          
+       
+       
+    </body>
+
+</html>

@@ -1,0 +1,186 @@
+
+.navMenu {
+    width: 100%;
+    justify-content: space-between;
+    color: #333333;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    height: 77px;
+}
+
+#logo {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #000000;
+    font-weight: 600;
+    padding: 20px 0;
+    text-decoration: none;
+    margin-left: 1rem;
+    align-items: center;
+    font-family: "Noto Sans KR", serif;
+}
+
+#logo > span {
+    color: #4CAF50;
+    font-family: "Noto Sans KR", serif;
+}
+
+nav {
+    width: auto;
+    height: auto;
+    font-family: "Noto Sans KR", serif;
+}
+
+nav ul {
+    display: table;
+    margin-right: 1rem;
+}
+
+nav ul li {
+    float: left;
+    list-style: none;
+    right: -17px;
+    position: relative;
+}
+
+nav ul li a {
+    color: #200000;
+    font-size: 18px;
+    padding: 25px 20px;
+    display: inline-block;
+    transition: all 0.5s ease 0s;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #4CAF50;
+    color: #ffffff;
+    transition: all 0.5s ease 0s;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
+
+nav ul li a:hover i {
+    color: #ffffff;
+    transition: all 0.5s ease 0s;
+}
+
+nav ul li a i {
+    padding-right: 10px;
+    color: #4CAF50;
+    transition: all 0.5s ease 0s;
+}
+
+.toggle-menu ul {
+    display: table;
+    width: 25px;
+    transition: 0.4s;
+    position: relative;
+}
+
+.toggle-menu ul li {
+    width: 100%;
+    height: 3px;
+    background-color: #4CAF50;
+    margin-bottom: 4px;
+    list-style: none;
+    position: relative;
+    transition: 0.4s;
+    top: 15px;
+}
+
+.toggle-menu.active ul li:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.toggle-menu.active ul li:nth-child(2) {
+    opacity: 0;
+}
+
+.toggle-menu.active ul li:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+input[type=checkbox],
+label {
+    display: none;
+}
+
+@media only screen and (max-width: 1070px) {
+    .navMenu {
+        padding: 10px;
+        z-index: 999;
+        
+    }
+
+    #logo {
+        z-index: 102;
+        margin-left: 1rem;
+    }
+
+    input[type=checkbox] {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        background: none;
+    }
+
+    input[type=checkbox]:focus {
+        background: none;
+    }
+
+    label {
+        padding: 10px 0;
+        position: relative;
+        z-index: 101;
+        display: inline-block;
+        cursor: pointer;
+        margin-right: 1rem;
+    }
+
+    nav {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 62px;
+        background-color: #ffffff;
+        z-index: 99;
+        width: 100%;
+        height: calc(100vh - 62px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    nav ul {
+        width: 100%;
+        display: table;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    nav ul li {
+        float: none;
+        padding: 0;
+        width: 100%;
+        display: table-row;
+    }
+
+    nav ul li a {
+        color: #333;
+        font-size: 24px;
+        padding: 15px 0;
+        display: block;
+        border-bottom: 1px solid rgba(225, 225, 225, 0.1);
+        width: 100%;
+    }
+
+    nav ul li a i {
+        color: #4CAF50;
+        padding-right: 13px;
+    }
+}

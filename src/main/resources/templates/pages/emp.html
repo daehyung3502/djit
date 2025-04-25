@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
+    <head>
+        <title>취업정보소개</title>
+        <link rel="stylesheet" th:href="@{/css/emp.css}">
+
+    </head>
+
+    <body>
+      
+           
+                <div class="container">
+                    <div class="empTitle">중앙능력개발원<br>취업관리시스템</div>
+                    
+                    <div class="feature-grid">
+                        <!-- Top row -->
+                        <div class="feature feature-top feature-left">
+                            <h2>사후이력관리 & 보수교육</h2>
+                        </div>
+                        <div class="feature feature-top">
+                            <h2>프로젝트 발표회 & 취업지원</h2>
+                        </div>
+                        <div class="feature feature-top feature-right">
+                            <h2>취업사정회의</h2>
+                        </div>
+                        
+                        <!-- Bottom row - aligned with first and third elements of top row -->
+                        <div class="feature feature-bottom">
+                            <h2>산업체 멘토링 & 워크샵</h2>
+                        </div>
+                        <div class="feature" style="visibility: hidden;">
+                            <!-- Empty middle cell -->
+                        </div>
+                        <div class="feature feature-bottom">
+                            <h2>겸임교수 & 취업상담</h2>
+                        </div>
+                    </div>
+                </div>
+             
+
+           
+              <div class="container1">
+                <div class="header">
+                  <h1 class="title">채용 프로세스</h1>
+                </div>
+                
+                <div class="process-timeline">
+                  <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-label">취업상담</div>
+                  </div>
+                  
+                  <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-label">입사지원서 작성요령 지도</div>
+                  </div>
+                  
+                  <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-label">면접 크리닉</div>
+                  </div>
+                  
+                  <div class="step">
+                    <div class="step-number">04</div>
+                    <div class="step-label">채용약정업체 취업추천 및 면접</div>
+                  </div>
+                  
+                  <div class="step">
+                    <div class="step-number">05</div>
+                    <div class="step-label">채용 후 사후관리</div>
+                  </div>
+                </div>
+                </div>
+            
+              
+            
+
+        
+    </body>
+
+</html>

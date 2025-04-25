@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/layout}" layout:fragment="Content" th:with="bannerType='default1'">
+    <head>
+        <title>중앙능력개발원</title>
+         <link rel="stylesheet" th:href="@{/css/main.css}">
+    </head>
+    <body>
+        
+
+        <div class="itIntro" id="itIntroSection">
+            <div class="itIntroTop">
+                <div class="itIntroTopLeft">
+                    <div class="itIntroTopLeftMark"><img th:src="@{/images/lic.png}"></div>
+                    <div class="itIntroTopLeftText1">고용노동부 직업훈련</div>
+                    <div class="itIntroTopLeftText2">5년 인증 우수훈련 기관</div>
+                </div>
+                <div class="itIntroTopRight">
+                    <div class="itIntroTopRightText1 itIntroTopRightText">현장중심 IT 인력양성</div>
+                    <div class="itIntroTopRightText2 itIntroTopRightText">현장 중심의 IT 인력 양성 학원은 실제 산업 현장에서 요구되는 실무 능력을 집중적으로 개발합니다.<br>
+                        최신 기술과 트렌드를 반영한 커리큘럼을 통해<br>
+                        이론뿐만 아니라 현장 경험을 바탕으로 한 실습을 제공합니다.<br>
+                        학생들은 직무에 바로 투입될 수 있는 준비된 IT 전문가로 성장합니다.</div>
+                </div>
+            </div>
+            <div class="itIntroBottom">
+                <div class="itIntroBottomText itIntroBottomText1">
+                    <i class="fa fa-lightbulb-o"></i>
+                    창의적 인재양성
+                </div>
+                <div class="itIntroBottomText itIntroBottomText2">
+                    <i class="fa fa-connectdevelop"></i>
+                    융합형 인재양성
+                </div>
+                <div class="itIntroBottomText itIntroBottomText3">
+                    <i class="fa fa-user-circle-o"></i>맞춤형 인재양성
+                </div>
+                <div class="itIntroBottomText itIntroBottomText4">
+                    <i class="fa fa-line-chart"></i>
+                    미래지향적 인재양성
+                </div>
+            </div>
+        </div>
+        <div class="courseTop">
+            <span>교육</span>
+            과정 모집</div>
+        <div class="courseText">
+            <div class="card-group">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <div>빅데이터융합 스프링부트</div>
+                            <div>(자바&파이썬) 응용 SW 개발자</div>
+                        </h5>
+                        <p class="card-text">
+                            <span class="card-date">개강 : 2025년 5월 12일</span><br>
+                            <span class="card-duration">기간 : 6개월 900시간(1일 8H)</span><br>
+                            <span class="card-time">시간 : 09:00 ~ 17: 30 (야간 실습실 개방)</span>
+                        </p>
+                        <p class="card-text">
+                            <strong>주요 교과 :</strong>
+                            <ul class="course-list">
+                                <li>JAVA</li>
+                                <li>Python</li>
+                                <li>Web Front</li>
+                                <li>JSP&Servlet</li>
+                                <li>Spring Framework</li>
+                                <li>Spring Boot</li>
+                                <li>파이썬 활용 크롤링</li>
+                                <li>빅데이터 수집, 처리, 분석, 시각화</li>
+                                <li>실무프로젝트</li>
+                            </ul>
+                        </p>
+                        <div class="card-text courseButton">
+                            <a th:href="@{/pages/course}" class="detail-link" data-tab="bigdata">
+                                자세히보기
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <div>클라우드기반 풀스텍 개발과</div>
+                            <div>빅데이터 분석 서비스 구현을</div>
+                            <div>위한 전문가 양성과정</div>
+                        </h5>
+                        <p class="card-text">
+                            <span class="card-date">개강 : 2025년 03월 18일</span><br>
+                            <span class="card-duration">기간 : 6개월 960시간(1일 8H)</span><br>
+                            <span class="card-time">시간 : 09:00 ~ 17: 30 (야간 실습실 개방)</span>
+                        </p>
+                        <p class="card-text">
+                            <strong>주요 교과 :</strong>
+                            <ul class="course-list">
+                                <li>JAVA</li>
+                                <li>Python</li>
+                                <li>Web Front</li>
+                                <li>오라클 DB</li>
+                                <li>JSP&Servlet</li>
+                                <li>Spring Framework</li>
+                                <li>Spring Boot</li>
+                                <li>빅데이터 분석도구 활용</li>
+                                <li>머신러닝&딥러닝</li>
+                                <li>AWS 클라우드 웹서비스</li>
+                                <li>실무프로젝트</li>
+                            </ul>
+                        </p>
+                        <div class="card-text courseButton">
+                            <a th:href="@{/pages/course}" class="detail-link" data-tab="cloud">
+                                자세히보기
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <div>풀 스텍 SW 엔지니어링&</div>
+                            <div>디지털 트랜스포메이션 과정</div>
+                        </h5>
+                        <p class="card-text">
+                            <span class="card-date">개강 : 2025년 03월 18일</span><br>
+                            <span class="card-duration">기간 : 6개월 960시간(1일 8H)</span><br>
+                            <span class="card-time">시간 : 09:00 ~ 17: 30 (야간 실습실 개방)</span>
+                        </p>
+                        <p class="card-text">
+                            <strong>주요 교과 :</strong>
+                            <ul class="course-list">
+                                <li>JAVA</li>
+                                <li>Python</li>
+                                <li>Web Front</li>
+                                <li>JSP&Servlet</li>
+                                <li>Spring Framework</li>
+                                <li>SpringBoot</li>
+                                <li>파이썬 활용 크롤링</li>
+                                <li>BigData 처리, 분석, 시각화</li>
+                                <li>ORACLE DB</li>
+                                <li>클라우드 컴퓨팅</li>
+                                <li>머신러닝&딥러닝</li>
+                                <li>애자일&데브옵스</li>
+                                <li>실무프로젝트</li>
+                            </ul>
+                        </p>
+                        <div class="card-text courseButton">
+                            <a th:href="@{/pages/course}" class="detail-link" data-tab="sw">
+                                자세히보기
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="welfareInfo">
+            <div class="welfare">
+                <div class="welfareTop">
+                    <div class="welfareImage">
+                        <img th:src="@{/images/welfare1.png}">
+                    </div>
+                    <div class="welfareTitle">수강료 · 교재비</div>
+                </div>
+                <div class="welfareText">100% 전액무료 매월 최대 816,000원 훈련장려금 지급</div>
+            </div>
+            <div class="welfare">
+                <div class="welfareTop">
+                    <div class="welfareImage">
+                        <img th:src="@{/images/welfare2.png}">
+                    </div>
+                    <div class="welfareTitle">방과 후 학습</div>
+                </div>
+                <div class="welfareText">실습실 개방, 개인 보충학습, 면접클리닉<br>
+                    산 • 학 채용 네트워크 구축</div>
+            </div>
+            <div class="welfare">
+                <div class="welfareTop">
+                    <div class="welfareImage">
+                        <img th:src="@{/images/welfare3.png}">
+                    </div>
+                    <div class="welfareTitle">상담 · 문의</div>
+                </div>
+                <div class="welfareText">
+                    <span>042)</span>254-2462</div>
+            </div>
+        </div>
+        <div class="portfolioTop">
+            <span>수강생</span>
+            포트폴리오</div>
+        <div class="portfolioInfo">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <a href="https://github.com/SilverCastle123/project" target="_blank">
+                                <img th:src="@{/images/github1.png}"/>
+                                <div class="slide-title">서강대학교 LINC사업단 홈페이지 구축</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <a href="https://github.com/ParkCheolSun/Library_project" target="_blank">
+                                <img th:src="@{/images/github2.png}"/>
+                                <div class="slide-title">광주 남구 통합도서관 홈페이지 개편</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <a href="https://github.com/EODOHA/youth" target="_blank">
+                                <img th:src="@{/images/github3.png}"/>
+                                <div class="slide-title">청년 맟춤형 온라인 취업지원사업</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <a href="https://github.com/gicheol1/Project_Git" target="_blank">
+                                <img th:src="@{/images/github4.png}"/>
+                                <div class="slide-title">축제 통합 홍보 페이지 프로젝트</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-content">
+                            <a href="https://github.com/Younglan/cantata" target="_blank">
+                                <img th:src="@{/images/github5.png}"/>
+                                <div class="slide-title">부산 오페라하우스 콘서트홀 통합운영시스템</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="mapTop">
+            <span>위치</span>
+            안내</div>
+        <div class="mapInfo">MapInfo 구글 맵 api</div>
+      
+        	<script th:src="@{/js/main.js}"></script>
+        
+    </body>
+</html>

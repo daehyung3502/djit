@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/adminLayout}" layout:fragment="Content">
+<head>
+    <title>캘린더</title>
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+</head>
+<body>
+    <div class="calendar-container">
+        <h1>예약 캘린더</h1>
+
+        <div class="calendar-actions">
+            <form class="calendar-form" th:action="@{/admin/calendar}" method="get">
+                <select name="year">
+                    <option th:each="year : ${#numbers.sequence(calendarData.currentYear - 5, calendarData.currentYear + 5)}" 
+                            th:value="${year}" 
+                            th:text="${year} + '년'"
+                            th:selected="${year == calendarData.selectedYear}"></option>
+                </select>
+                <select name="month">
+                    <option th:each="month : ${#numbers.sequence(1, 12)}" 
+                            th:value="${month}" 
+                            th:text="${month} + '월'"
+                            th:selected="${month == calendarData.selectedMonth}"></option>
+                </select>
+                <button type="submit" class="btn btn-secondary">조회</button>
+            </form>
+
+            <div>
+                <a class="btn today-btn" th:href="@{/admin/calendar}">
+                    <i class="fas fa-calendar-day"></i> 오늘
+                </a>
+            </div>
+        </div>
+
+    
+        <div class="calendar-header">
+            <a class="btn btn-outline" th:href="@{/admin/calendar(year=${calendarData.prevYear}, month=${calendarData.prevMonth})}">
+                <i class="fas fa-chevron-left"></i> 이전 달
+            </a>
+            <div class="year-month" th:text="${calendarData.selectedYear} + '년 ' + ${calendarData.selectedMonth} + '월'"></div>
+            <a class="btn btn-outline" th:href="@{/admin/calendar(year=${calendarData.nextYear}, month=${calendarData.nextMonth})}">
+                다음 달 <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+
+        
+        <table class="calendar-table">
+            <thead>
+                <tr>
+                    <th class="sunday">일</th>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                    <th class="saturday">토</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="week : ${calendarData.calendar}">
+                    <td th:each="day : ${week}" th:class="${day.today ? 'today' : ''} + ' ' + ${day.dayOfWeek == 0 ? 'sunday' : ''} + ' ' + ${day.dayOfWeek == 6 ? 'saturday' : ''}">
+                        <div th:class="${day.currentMonth ? 'day' : 'day other-month'}" th:text="${day.day}"></div>
+                        
+                        <div th:if="${day.currentMonth}" class="reservation-container">
+                            <div th:each="consultation : ${calendarData.consultations}"
+                                 th:if="${consultation.consultationDateTime != null && 
+                                    consultation.consultationDateTime.monthValue == calendarData.selectedMonth &&
+                                    consultation.consultationDateTime.dayOfMonth == day.day}"
+                                 class="reservation">
+                                <a th:href="@{/admin/applicationDetail/{number}(number=${consultation.applicationNumber})}" class="reservation-link">
+                                    <i class="far fa-clock"></i>
+                                    <span th:text="${#temporals.format(consultation.consultationDateTime ?: '', 'HH:mm')} + ' ' + ${consultation.name ?: '이름 없음'}"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+    </div>
+</body>
+</html>

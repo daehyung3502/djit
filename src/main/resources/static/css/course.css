@@ -1,0 +1,444 @@
+   .container {
+                max-width: 1980px;
+                padding: 20px;
+                margin-left: 20px;
+            }
+
+            .vertical-tabs-container {
+                display: flex;
+                flex-wrap: nowrap;
+            }
+
+            .nav-subjects {
+                width: 350px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-right: 30px;
+                flex-shrink: 0;
+            }
+
+            .subject-tab {
+                padding: 15px 20px;
+                cursor: pointer;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                background-color: #f9f9f9;
+                transition: background-color 0.3s, color 0.3s;
+                text-align: left;
+            }
+
+            .subject-tab.active {
+                background-color: #367c39;
+                color: white;
+                border-color: #ffffff;
+            }
+
+            .subject-tab:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+                transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.6s ease !important;
+            }
+
+            .subject-info {
+                padding: 25px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                background-color: #fff;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                display: none;
+                max-width: 74vw;
+                height: auto;
+                flex-grow: 1;
+            }
+
+            .subject-info.active {
+                display: block;
+            }
+            .subject-info > .couresName {
+                color: #333;
+                text-align: center;
+                margin-bottom: 15px;
+                font-size: 2em;
+
+            }
+            .subject-info > .courseNameSeparate {
+                position: relative;
+                width: 1010px;
+                height: 2px;
+                background-color: #4CAF50;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 45px;
+
+            }
+            .subject-info > .courseInfo {
+                width: 95%;
+                max-width: 1100px;
+                margin: 40px auto;
+                padding: 30px;
+               
+
+            }
+
+            .courseInfoContainer {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 2%;
+            }
+
+            .info-box {
+                width: calc(50% - 1%);
+                margin-bottom: 25px;
+                border-top: 3px solid #367c39;
+                padding: 25px;
+                box-sizing: border-box;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .info-box h2 {
+                margin-top: 0;
+                margin-bottom: 12px;
+                color: #367c39;
+                font-size: 1.4em;
+                font-weight: 600;
+
+            }
+            .info-box p {
+                color: #555;
+                line-height: 1.6;
+                font-size: 1.05em;
+            }
+            @media (max-width: 768px) {
+                .info-box,
+                .info-box-blue {
+                    width: 100%;
+                }
+            }
+            .subject-info > .couresText1 {
+                color: #333;
+                margin-bottom: 10px;
+                font-size: 1.5em;
+                margin-bottom: 45px;
+                padding-left: 12px;
+            }
+            .subject-info > .couresText2 {
+                margin-bottom: 45px;
+                padding-left: 40px;
+            }
+
+            .roadmap-container {
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                position: relative;
+                padding-left: 10px;
+                margin-bottom: 15px;
+                height: 170px;
+
+            }
+
+            .roadmap-item {
+                display: inline-block;
+                width: 160px;
+                height: 150px;
+                margin-right: 40px;
+                padding: 15px;
+                border-radius: 10px;
+                background-color: #fff;
+                box-shadow: 2px 5px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                vertical-align: top;
+                opacity: 0;
+                animation: slideIn 0.8s ease-out forwards;
+                animation-delay: calc(var(--delay) * 0.4s);
+                position: relative;
+            }
+
+            .roadmap-item::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: -30px;
+                transform: translateY(-50%);
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 15px solid #ddd;
+            }
+
+            .roadmap-item:last-child::after {
+                display: none;
+            }
+
+            .roadmap-item:nth-child(1) {
+                --delay: 1;
+            }
+            .roadmap-item:nth-child(2) {
+                --delay: 2;
+            }
+            .roadmap-item:nth-child(3) {
+                --delay: 3;
+            }
+            .roadmap-item:nth-child(4) {
+                --delay: 4;
+            }
+            .roadmap-item:nth-child(5) {
+                --delay: 5;
+            }
+            .roadmap-item:nth-child(6) {
+                --delay: 6;
+            }
+            .roadmap-item:nth-child(7) {
+                --delay: 7;
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(-60px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .month {
+                font-weight: bold;
+                font-size: 1.1em;
+                color: #367c39;
+                margin-bottom: 8px;
+            }
+
+            .content {
+                line-height: 1.4em;
+                color: #555;
+            }
+            .courseIn {
+                display: flex;
+                position: relative;
+                align-items: center;
+                gap: 15px;
+            }
+            .courseIn > .courseNum {
+                font-size: 25px;
+                color: #367c39;
+            }
+
+            .courseIn > .separate {
+                background-color: #D8D8D8;
+                width: 2px;
+                height: 18px;
+            }
+            .courseIn > .courseInName {
+                font-size: 18px;
+                position: relative;
+                top: 3px;
+                color: #367c39;
+            }
+            .benefits {
+                width: 100%;
+                background-color: #fff;
+
+            }
+
+            .benefit-group {
+                margin-bottom: 30px;
+                padding: 20px;
+                border-radius: 8px;
+                width: 100%;
+
+            }
+
+            .benefit-group:last-child {
+                margin-bottom: 0;
+            }
+
+            .benefit-group ul li {
+                margin-bottom: 10px;
+                padding-left: 30px;
+                position: relative;
+                text-indent: -10px;
+
+            }
+           
+            .benefit-group ul ul {
+                margin-top: 5px;
+                padding-left: 20px;
+                margin-bottom: 5px;
+            }
+
+            .benefit-group ul li strong {
+                font-weight: 600;
+                color: #444;
+            }
+            .benefit-group > ul,
+            .benefit-group > ul > li > ul {
+                list-style: none;
+                padding-top: 10px;
+            }
+            .itButtons {
+                margin-top: 40px;
+                max-width: 90%;
+                position: relative;
+
+            }
+
+            .itButtons > .itButton1 {
+                border-radius: 15px;
+                text-decoration: none;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+                padding: 10px 20px;
+                color: #4CAF50;
+                font-weight: bold;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                display: inline-block;
+                text-align: center;
+                line-height: 40px;
+                background-color: transparent;
+                border: 2px solid #4CAF50;
+
+            }
+
+            .itButtons > .itButton1:hover {
+                background-color: #4CAF50;
+                color: white;
+                cursor: pointer;
+                transform: translateY(-5px) scale(1.05);
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            .itButtons > .itButton1 .fa-arrow-right {
+                margin-left: 8px;
+                transition: transform 0.3s ease;
+            }
+
+            .itButtons > .itButton1:hover .fa-arrow-right {
+                transform: translateX(5px);
+            }
+
+            .inItButton1 {
+                width: 100px;
+                text-align: center;
+                color: white;
+                border-radius: 15px 0 0 15px;
+                border: 1px solid #fff;
+            }
+
+            
+            @media (max-width: 1600px) {
+
+               
+
+                .vertical-tabs-container {
+                    flex-direction: row; 
+                }
+
+                .nav-subjects {
+                    width: 300px;
+                    margin-right: 0;
+                    margin-bottom: 20px;
+                }
+
+                .subject-tab {
+                    padding: 10px 15px;
+                }
+
+                .subject-info {
+                    flex: 1;
+        max-width: calc(100% - 320px);
+
+                }
+                .subject-info > .couresName {
+                    font-size: 1.8em;
+                }
+
+                .subject-info > .courseNameSeparate {
+                    width: 90%;
+                    margin-bottom: 25px;
+                }
+                .subject-info > .couresText1 {
+                    font-size: 1.2em;
+                    margin-bottom: 25px;
+                    padding-left: 0;
+
+                }
+                .subject-info > .couresText2 {
+                    padding-left: 10px;
+                }
+
+                .roadmap-container {
+
+                    height: auto;
+                    padding-bottom: 0;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                .roadmap-item {
+                    width: 160px;
+                    margin-right: 20px;
+                    margin-bottom: 10px;
+                    display: block;
+                    height: 140px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+
+                .roadmap-item::after {
+                    display: none;
+                }
+
+                .benefit-group h3 {
+                    font-size: 1.3em;
+                }
+                .benefit-group ul li {
+                    font-size: 0.95em;
+                    padding-left: 20px;
+                }
+                .benefit-group ul li i {
+                    top: 2px;
+
+                }
+                
+            }
+
+            @media (max-width: 480px) {
+
+               
+
+                .subject-info > .couresName {
+                    font-size: 1.5em;
+                }
+                .subject-info > .couresText1 {
+                    font-size: 1.1em;
+                }
+
+                .roadmap-item {
+                    width: 120px;
+                    margin-right: 10px;
+                }
+                .courseIn > .courseNum {
+                    font-size: 20px;
+                }
+                .courseIn > .courseNum > i {
+                    font-size: 25px;
+                }
+                .courseIn > .courseInName {
+                    font-size: 16px;
+                }
+                .benefit-group h3 {
+                    font-size: 1.2em;
+                }
+                .benefit-group ul li {
+                    font-size: 0.9em;
+                }
+
+            }

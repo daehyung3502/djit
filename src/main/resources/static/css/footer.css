@@ -1,0 +1,128 @@
+.footer {
+    width: 100%;
+    margin-top: auto;
+    background-color: #333;
+    color: #ddd;
+    font-size: 0.9em;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px; /* Increased gap for better spacing with fewer sections */
+}
+
+.footer-section {
+    flex: 1 1 300px; /* Increased min-width for better balance with two sections */
+}
+
+.footer-section h2 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.footer-section.about {
+    flex: 2 1 400px; /* Give the about section more space */
+}
+
+.footer-section.about .logo-text {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.footer-section.about .logo-text span {
+    color: #fff;
+}
+
+.footer-section.about p {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.footer-section.about .contact span {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-section.about .contact i {
+    margin-right: 0.5rem;
+    color: #4CAF50;
+}
+
+.footer-section.about .socials a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    color: #fff;
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+.footer-section.about .socials a:hover {
+    background-color: #4CAF50;
+}
+
+.footer-section.links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section.links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section.links a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section.links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #555;
+    padding: 15px 0;
+    font-size: 0.8em;
+    margin-top: 20px; /* Added margin for better separation */
+}
+
+.footer-bottom p {
+    margin-bottom: 0.3rem;
+}
+
+.footer-bottom a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin-bottom: 1.5rem;
+    }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<th:block th:fragment="BannerFragment">
+
+ <link rel="stylesheet" th:href="@{/css/banner1.css}">
+<div class="itInfo" th:style="'background-image: url(' + @{/images/sample1.png} + ');'">
+
+            <div class="certification">
+                <p class="highlight">
+                    대전 IT교육의 미래를 이끌어가는
+                </p>
+                <p class="award">중앙<span>능력개발원</span></p>
+            </div>
+            <div class="itButtons">
+                <a th:href="@{/pages/course}" class="itButton1">
+                    교육과정
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+                <a th:href="@{/pages/regApp}" class="itButton2">
+                    온라인접수
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <button class="scroll-button" aria-label="Scroll to next section">
+                <i class="fa fa-angle-down"></i>
+            </button>
+        </div>
+       
+</th:block>

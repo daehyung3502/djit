@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
+
+    <head>
+        <title>입학안내</title>
+        <link rel="stylesheet" th:href="@{/css/regInfo.css}">
+ 
+       
+    </head>
+
+    <body>
+      
+            
+            <div class="admissions">
+                <div class="admissions-container">
+                    <div class="admissions-header">
+                        <span>입학</span> 절차
+                         
+                    </div>
+                    <div class="steps-container">
+                        <div class="step">
+                            <div class="step-content">
+                                <div class="step-number">1</div>
+                                <i class="fa fa-upload card-icon"></i>
+                                <h3>접수</h3>
+                                <span class="data-flow"></span>
+                            </div>
+                        </div>
+
+                        <div class="arrow">
+                            <i class="fa fa-chevron-right"></i>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-content">
+                                <div class="step-number">2</div>
+                                <i class="fa fa-comments card-icon"></i>
+                                <h3>상담</h3>
+                                <span class="data-flow"></span>
+                            </div>
+                        </div>
+
+                        <div class="arrow">
+                            <i class="fa fa-chevron-right"></i>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-content">
+                                <div class="step-number">3</div>
+                                <i class="fa fa-search card-icon"></i>
+                                <h3>신청</h3>
+                                <span class="data-flow"></span>
+                            </div>
+                        </div>
+
+                        <div class="arrow">
+                            <i class="fa fa-chevron-right"></i>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-content">
+                                <div class="step-number">4</div>
+                                <i class="fa fa-check-circle card-icon"></i>
+                                <h3>승인</h3>
+                                <span class="data-flow"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="receiptContent">
+                <div class="rc-container">
+                    <div class="rc-title">접수 안내</div>
+
+                    <div class="rc-section">
+                        <div class="rc-section-title">지원대상</div>
+                        <div class="rc-item">
+                            <div class="rc-content">내일배움카드 소지자, 근로자내일배움카드 소지자</div>
+                        </div>
+                        <div class="rc-item">
+                            <div class="rc-content">구직을 희망하는 만 15세이상 실업자, 미취업자</div>
+                        </div>
+                        <div class="rc-item">
+                            <div class="rc-content">야간대학생, 방통대학생, 영세자영업자, 대학졸업여정자 및 3학년이상 대학생</div>
+                        </div>
+                    </div>
+
+                    <div class="rc-section">
+                        <div class="rc-section-title">수강신청서 작성</div>
+                        <div class="rc-item">
+                            <div class="rc-content">접수 및 상담은 본 교육원 교육상담실에서 하실 수 있습니다.</div>
+                        </div>
+                        <div class="rc-item">
+                            <div class="rc-content">온라인 및 전화 상담 및 접수 가능합니다.</div>
+                        </div>
+                    </div>
+
+                    <div class="rc-section">
+                        <div class="rc-section-title">상담</div>
+                        <div class="rc-item">
+                            <div class="rc-content">담당 교육 선생님과 교육내용 및 진로에 대한 심층 상담을 진행 합니다.</div>
+                        </div>
+                        <div class="rc-item">
+                            <div class="rc-content">상담 진행으로 면접을 대신 합니다.</div>
+                        </div>
+                        <div class="rc-item">
+                            <div class="rc-content">상담을 통해 교육 부적합 대상자는 선발하지 않습니다.</div>
+                        </div>
+                    </div>
+
+                    <div class="rc-section">
+                        <div class="rc-section-title">신청</div>
+                        <div class="rc-item">
+                            <div class="rc-content">워크넷(www.work.go.kr)사이트에 회원가입 후 구직신청</div>
+                        </div>
+                        <div class="rc-item">
+                            <div class="rc-content">HRD(www.hrd.go.kr)사이트에 회원가입 후 과정검색하여 수강신청</div>
+                        </div>
+                    </div>
+
+                    <div class="rc-section">
+                        <div class="rc-section-title">승인</div>
+                        <div class="rc-item">
+                            <div class="rc-content">수강 신청한 대상자 선발</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mapTop">
+                <span>위치</span>
+                안내
+            </div>
+
+            <div class="mapInfo">
+
+                <div class="map-container">
+                    <h2>오시는 길</h2>
+                    <div class="map-placeholder">
+                        구글 지도가 여기에 표시됩니다
+                    </div>
+                    <div class="address-info">
+                        <p>
+                            <span class="highlight">주소:</span>
+                            대전광역시 서구 둔산서로 17 양호빌딩 6층</p>
+                        <p>
+                            <span class="highlight">전화:</span>
+                            042-254-2462</p>
+                        <p>
+                            <span class="highlight">이메일:</span>
+                            info@djit21.co.kr</p>
+                    </div>
+                </div>
+            </div>
+
+            
+      
+
+   
+    </body>
+
+</html>

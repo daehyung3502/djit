@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/adminLayout}" layout:fragment="Content">
+
+<head>
+    <title>지원서 수정</title>
+    <link rel="stylesheet" th:href="@{/css/applicationModify.css}">
+</head>
+
+<body>
+    <div class="container" th:if="${applicationResponseDto}">
+        <div class="headerdetail">
+            <h1>지원서 수정
+                <span class="badge"
+                    th:classappend="${applicationResponseDto.consultation?.number != null ? 'badge-scheduled' : 'badge-pending'}"
+                    th:text="${applicationResponseDto.consultation?.number != null ? '상담 예약 완료' : '상담 대기 중'}" />
+            </h1>
+            <div class="subtitle" th:text="${applicationResponseDto.subjectName}" />
+        </div>
+
+        <div class="content">
+            <form id="editForm" th:action="@{/admin/application/update}" th:object="${applicationResponseDto}" method="POST">
+                <input type="hidden" id="number" name="number" th:field="*{number}">
+
+         
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user"></i>
+                        지원자 정보
+                    </h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">지원 과정</span>
+                            <div class="detail-value" >
+                                <select id="subjectName" class="form-control" name="subjectName" th:field="*{subjectName}"  required>
+                                    <option value="클라우드기반 풀스택 개발 및 빅데이터 분석서비스 구현을 위한 전문가 양성과정">클라우드기반 풀스택 개발 및 빅데이터 분석서비스 구현을 위한 전문가 양성과정</option>
+                                    <option value="풀 스택 SW 엔지니어링 & 디지털 트랜스포메이션 과정">풀 스택 SW 엔지니어링 &amp; 디지털 트랜스포메이션 과정</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">이름</span>
+                            <input type="text" class="form-control" id="name" name="name" 
+                                th:field="*{name}" required>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">이메일</span>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                th:field="*{email}" required>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">성별</span>
+                            <select class="form-control" id="sex" name="sex" th:field="*{sex}" required>
+                                <option value="남">남</option>
+                                <option value="여">여</option>
+                            </select>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">생년월일</span>
+                            <input type="date" class="form-control" id="birth" name="birth" 
+                            th:field="*{birth}" required>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">연락처</span>
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" 
+                            th:field="*{phoneNumber}" required>
+                        </div>
+                    </div>
+                </div>
+
+       
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        추가 정보
+                    </h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">주소</span>
+                            <input type="text" class="form-control" id="address" name="address" 
+                            th:field="*{address}" required>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">최종 학력</span>
+                            <select class="form-control" id="educationLevel" name="educationLevel" th:field="*{educationLevel}" required>
+                                <option value="고등학교 졸업">고등학교 졸업</option>
+                                <option value="전문대 재학">전문대 재학</option>
+                                <option value="전문대 졸업">전문대 졸업</option>
+                                <option value="4년제 대학 재학 (학사)">4년제 대학 재학 (학사)</option>
+                                <option value="4년제 대학 졸업 (학사)">4년제 대학 졸업 (학사)</option>
+                                <option value="대학원 졸업 (석사)">대학원 졸업 (석사)</option>
+                                <option value="기타">기타</option>
+                            </select>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">결혼 여부</span>
+                            <select class="form-control" id="married" name="married" th:field="*{married}" required>
+                                <option value="미혼">미혼</option>
+                                <option value="기혼">기혼</option>
+                            </select>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">고용 보험 가입 여부</span>
+                            <select class="form-control" id="employmentInsurance" name="employmentInsurance" th:field="*{employmentInsurance}" required>
+                                <option value="유">유</option>
+                                <option value="무">무</option>
+                            </select>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">교육 목표</span>
+                            <select class="form-control" id="educationGoal" name="educationGoal" th:field="*{educationGoal}" required>
+                                <option value="취업 및 자격증">취업</option>
+                                <option value="기타">기타</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-comment-alt"></i>
+                        지원 동기
+                    </h3>
+                    <div class="form-group">
+                        <textarea class="form-control" id="motivation" name="motivation" rows="5" 
+                            required th:field="*{motivation}"></textarea>
+                    </div>
+                </div>
+
+               
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-sticky-note"></i>
+                        비고
+                    </h3>
+                    <div class="form-group">
+                        <textarea class="form-control" id="note" name="note" rows="3" 
+                            th:field="*{note}"></textarea>
+                    </div>
+                </div>
+
+           
+                <div class="section">
+                    <h3 class="section-title">
+                        <i class="fas fa-calendar-check"></i>
+                        상담 정보
+                    </h3>
+                    <div class="details-grid">
+                        <div class="detail-item full-width">
+                            <span class="detail-label">상담 일시</span>
+                            <div class="detail-value" id="consultationDisplay"
+                            th:field="*{consultation?.number != null ? consultation.consultationDateTimeStr : '미정'}" />
+                            <div class="detail-info">상담 예약은 이전페이지에서 가능합니다.</div>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="timestamp">
+                    <div>
+                        <span class="label">지원 일시</span>
+                        <span
+                        th:text="*{#temporals.format(createdAt, 'yyyy-MM-dd HH:mm:ss')}" />
+                    </div>
+                    <div>
+                        <span class="label">최종 수정 일시</span>
+                        <span
+                        th:text="*{#temporals.format(updatedAt, 'yyyy-MM-dd HH:mm:ss')}" />
+                    </div>
+                </div>
+
+           
+                <div class="button-container">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        저장하기
+                    </button>
+                    <button type="button" id="deleteBtn" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        삭제하기
+                    </button>
+                    <a th:href="@{/admin/applicationDetail/{number}(number=${applicationResponseDto.number})}" id="cancleBtn" class="btn btn-secondary">
+                        <i class="fas fa-times"></i>
+                        취소
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:unless="${applicationResponseDto}" class="container" style="text-align: center;">
+        <div class="content">
+            <div style="padding: 40px 0;">
+                <i class="fas fa-exclamation-circle"
+                    style="font-size: 50px; color: #EF4444; margin-bottom: 20px;"></i>
+                <h1 style="margin-bottom: 15px;">오류</h1>
+                <p style="margin-bottom: 30px;">지원서 정보를 찾을 수 없습니다.</p>
+                <div class="button-container" style="justify-content: center;">
+                    <a th:href="@{/admin/list}" class="btn btn-secondary">
+                        <i class="fas fa-list"></i>
+                        목록으로 돌아가기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="currentPageNumber" th:value="${pageable?.pageNumber ?: 0}">
+
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPageNumber = document.getElementById('currentPageNumber').value;
+            const form = document.getElementById('editForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const number = document.getElementById('number').value;
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                
+                if (!name || !email || !phoneNumber) {
+                    alert('필수 항목을 모두 입력해주세요.');
+                    return;
+                }
+                
+               
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert('유효한 이메일 주소를 입력해주세요.');
+                    return;
+                }
+                
+                
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+                
+                fetch(`/admin/applicationModify/${number}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('네트워크 응답이 올바르지 않습니다.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('지원서가 성공적으로 수정되었습니다.');
+                    window.location.href = `/admin/applicationDetail/${data.number}?page=${currentPageNumber}`;
+                })
+                .catch(error => {
+                    console.error('오류:', error);
+                    alert('지원서 수정 중 오류가 발생했습니다.');
+                });
+            });
+        
+            const cancelBtn = document.getElementById('cancleBtn');
+            cancelBtn.addEventListener('click', function(event) {
+                if (!confirm('변경 사항을 취소하시겠습니까?')) {
+                    event.preventDefault();
+                }
+            });
+            const deleteBtn = document.getElementById('deleteBtn');
+            deleteBtn.addEventListener('click', function(event) {
+                if (confirm('정말로 지원서를 삭제하시겠습니까?')) {
+                    if(confirm('삭제된 지원서는 복구할 수 없습니다. 계속하시겠습니까?')) {
+                        const number = document.getElementById('number').value;
+                    fetch(`/admin/applicationModify/${number}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('네트워크 응답이 올바르지 않습니다.');
+                        }
+                        return response;
+                    })
+                    .then(data => {
+                        alert('지원서가 성공적으로 삭제되었습니다.');
+                        window.location.href = `/admin/list`;
+                    })
+                    .catch(error => {
+                        console.error('오류:', error);
+                        alert('지원서 삭제 중 오류가 발생했습니다.');
+                    });
+                    } else {
+                        return;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
