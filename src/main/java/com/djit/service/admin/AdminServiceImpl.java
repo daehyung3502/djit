@@ -6,11 +6,14 @@ import com.djit.dto.admin.ApplicationSummaryDto;
 import com.djit.dto.admin.CalendarDto;
 import com.djit.dto.admin.ConsultationDto;
 import com.djit.dto.admin.ConsultationResponseDto;
+import com.djit.dto.admin.CourseDto;
 import com.djit.dto.client.ApplicationModifyDto;
 import com.djit.entity.Application;
 import com.djit.entity.Consultation;
 import com.djit.repository.application.ApplicationRepository;
 import com.djit.repository.application.ConsultationRepository;
+import com.djit.repository.application.CourseRepository;
+
 import lombok.RequiredArgsConstructor;
 
 import java.time.DayOfWeek;
@@ -38,6 +41,7 @@ public class AdminServiceImpl implements AdminService {
 	private final Logger LOGGER = LoggerFactory.getLogger(AdminServiceImpl.class);
 	private final ApplicationRepository applicationRepository;
 	private final ConsultationRepository counsultationRepository;
+	private final CourseRepository courseRepository;
 	private final ModelMapper modelMapper;
 
 	@Override
@@ -114,6 +118,16 @@ public class AdminServiceImpl implements AdminService {
 		Application application = consultation.getApplication();	
 		counsultationRepository.delete(consultation);
 		application.deleteConsultation();
+	}
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<CourseDto> getCourses() {
+		LOGGER.info("코스 조회 서비스 호출");
+		List<CourseDto> courses = courseRepository.findAll().stream()
+				.map(course -> modelMapper.map(course, CourseDto.class)).collect(Collectors.toList());
+		return courses;
 	}
 
 	public CalendarDto generateCalendarData(Integer year, Integer month) {

@@ -4,9 +4,12 @@ import com.djit.dto.admin.ApplicationSummaryDto;
 import com.djit.dto.admin.CalendarDto;
 import com.djit.dto.admin.ConsultationDto;
 import com.djit.dto.admin.ConsultationResponseDto;
+import com.djit.dto.admin.CourseDto;
 import com.djit.dto.client.ApplicationModifyDto;
 import com.djit.service.admin.AdminService;
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,9 +119,18 @@ public class AdminController {
 	}
 
 	@GetMapping("/courseModify")
-	public String courseModify() {
+	public String courseModify(Model model) {
 		LOGGER.info("Admin courseModify page");
+		List<CourseDto> courses = adminService.getCourses();
+		LOGGER.info(courses.toString() + " : courses 값 확인");
+		model.addAttribute("courses", courses);
 		return "/admin/courseModify";
+	}
+
+	@GetMapping("/courseModifyDetail/{id}")
+	public String courseModifyDetail(Long id) {
+		LOGGER.info("Admin courseModifyDetail page");
+		return "/admin/courseModifyDetail";
 	}
 
 	@GetMapping("/login")

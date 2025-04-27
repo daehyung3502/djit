@@ -233,7 +233,7 @@
                     </button>
                 </div>
             </div>
-            <input id="consultationNumber" th:value="${applicationResponseDto.consultation?.number}" />
+            <input type="hidden" id="consultationNumber" th:value="${applicationResponseDto.consultation?.number}" />
         </div>
 
         <script th:inline="javascript">

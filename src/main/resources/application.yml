@@ -2,7 +2,7 @@ spring:
   application:
     name: djit
   datasource:
-    url: jdbc:mysql://localhost:3307/djit
+    url: jdbc:mysql://localhost:3306/djit
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 12345

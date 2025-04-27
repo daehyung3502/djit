@@ -1,7 +1,157 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{/layouts/adminLayout}" layout:fragment="Content">
+<head>
+    <title>코스 수정</title>
+    <style>
+        /* Clean, simplified CSS with primary blue theme */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #e0e0e0;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            padding: 20px;
+        }
+
+        .course-list {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            text-align: center;
+            
+        }
+
+        .course-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: flex-start;
+        }
+
+        .course-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            width: calc(33.33% - 25px);
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--text-color);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            padding: 20px 20px 0;
+            min-height: 75px;
+        }
+
+        .card-header h3 {
+            color: var(--primary-color);
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .details {
+            padding: 0 20px 15px;
+            color: var(--light-text);
+            font-size: 0.95em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .details p {
+            margin: 10px 0;
+        }
+
+        .subject {
+            margin: 15px 20px 10px;
+            color: var(--primary-color);
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .subject-list {
+            list-style: none;
+            padding: 0 20px;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .subject-list > li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            color: var(--light-text);
+        }
+
+       
+
+        .details-button {
+            margin: 20px;
+            padding: 12px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+            align-self: flex-end;
+            transition: background-color 0.2s ease;
+        }
+
+        .details-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 992px) {
+            .course-card {
+                width: calc(50% - 25px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .course-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
-    코스날짜수정페이지
+    <h1 class="course-list">과정 목록</h1>
+
+    <div class="course-container">
+        <!-- Loop through courses from the server -->
+        <a th:each="course : ${courses}" th:href="@{/admin/courseModifyDetail/{id}(id=${course.id})}" class="course-card">
+            <div class="card-header">
+                <h3 th:text="${course.courseName}">코스 이름</h3>
+            </div>
+            <div class="details">
+                <p th:text="'개강 : ' + ${#temporals.format(course.startDate, 'yyyy년 MM월 dd일')}">개강일</p>
+                <p th:text="'기간 : ' + ${course.duration}">기간</p>
+            </div>
+            <h4 class="subject">주요 교과 :</h4>
+            <ul class="subject-list">
+                <li th:each="subject : ${course.subjects}" th:text="${subject}">과목</li>
+            </ul>
+            <span class="details-button">자세히보기 →</span>
+        </a>
+    </div>
 </body>
 </html>

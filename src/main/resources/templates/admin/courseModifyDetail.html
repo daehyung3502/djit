@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/adminLayout}" layout:fragment="Content">
+<head>
+<title>코스 정보 수정</title>
+<link rel="stylesheet" th:href="@{/css/courseModifyDetail.css}">
+</head>
+
+<body>
+<div class="container">
+    <h1>코스 정보 수정</h1>
+    
+    <form id="courseEditForm">
+        <!-- 기본 정보 섹션 -->
+        <div class="form-section">
+            <div class="section-title">기본 정보</div>
+            
+            <div class="form-group">
+                <label for="courseName">코스명</label>
+                <input type="text" id="courseName" name="courseName" class="form-control" value="빅데이터융합 스프링부트 (자바&파이썬) 응용 SW 개발자">
+            </div>
+            
+            <div class="form-group">
+                <label for="courseTagline">코스 태그라인</label>
+                <input type="text" id="courseTagline" name="courseTagline" class="form-control" value="스프링 부트로 강력한 풀스텍 웹을 만들어가는 학습의 즐거움을 경험하세요!">
+            </div>
+            
+            <div class="form-group">
+                <label for="courseDescription">코스 설명</label>
+                <textarea id="courseDescription" name="courseDescription" class="form-control">자바와 파이썬 프로그래밍 언어를 기반으로 응용 프로그램 개발 요구사항을 분석하여 화면설계 및 DBMS 설치 및 운영 조작하고 데이터베이스 프로시저를 작성하고 빅데이터 수집 및 처리 기술을 활용하여 데이터를 분석하고 Vue.js와 React.js를 활용하고 스프링 부트을 통한 풀스텍 웹을 구현 할 수 있있도록 학습한다.</textarea>
+            </div>
+        </div>
+        
+        <!-- 일정 정보 섹션 -->
+        <div class="form-section">
+            <div class="section-title">일정 정보</div>
+            
+            <div class="form-group">
+                <label for="startDate">개강 일자</label>
+                <input type="date" id="startDate" name="startDate" class="form-control" value="2025-05-12">
+            </div>
+            
+            <div class="form-group">
+                <label for="duration">교육 기간</label>
+                <input type="text" id="duration" name="duration" class="form-control" value="6개월 900시간(1일 8교시)">
+            </div>
+            
+            <div class="form-group">
+                <label for="classTime">교육 시간</label>
+                <input type="text" id="classTime" name="classTime" class="form-control" value="09:00 ~ 17:30(야간 실습실 개방)">
+            </div>
+        </div>
+        
+        <!-- 주요 교과 섹션 -->
+        <div class="form-section">
+            <div class="section-title">주요 교과</div>
+            
+            <button type="button" class="btn-add" id="addSubjectButton">
+                <span>+ 교과목 추가</span>
+            </button>
+            
+            <div class="input-container" id="subjectInputContainer" style="display: none;">
+                <input type="text" id="newSubject" class="form-control input-field" placeholder="교과목 이름을 입력하세요">
+                <button type="button" class="add-btn" id="confirmAddSubject">추가</button>
+            </div>
+            
+            <ul class="list-container" id="subjectList">
+                <!-- 자바스크립트로 동적 생성 -->
+            </ul>
+            
+            <!-- 숨겨진 필드: 서버로 전송될 데이터 -->
+            <input type="hidden" id="subjectsJson" name="subjects">
+        </div>
+        
+        <!-- 로드맵 섹션 -->
+        <div class="form-section">
+            <div class="section-title">교육 로드맵</div>
+            
+            <div class="roadmap-container">
+                <!-- 1개월차 -->
+                <div class="roadmap-month">
+                    <h4>1개월차</h4>
+                    
+                    <button type="button" class="btn-add" id="addMonth1Button">
+                        <span>+ 항목 추가</span>
+                    </button>
+                    
+                    <div class="input-container" id="month1InputContainer" style="display: none;">
+                        <input type="text" id="newMonth1" class="form-control input-field" placeholder="항목 이름을 입력하세요">
+                        <button type="button" class="add-btn" id="confirmAddMonth1">추가</button>
+                    </div>
+                    
+                    <ul class="list-container" id="month1List">
+                        <!-- 자바스크립트로 동적 생성 -->
+                    </ul>
+                    
+                    <!-- 숨겨진 필드: 서버로 전송될 데이터 -->
+                    <input type="hidden" id="month1Json" name="roadmap[0]">
+                </div>
+                
+                <!-- 2개월차 -->
+                <div class="roadmap-month">
+                    <h4>2개월차</h4>
+                    
+                    <button type="button" class="btn-add" id="addMonth2Button">
+                        <span>+ 항목 추가</span>
+                    </button>
+                    
+                    <div class="input-container" id="month2InputContainer" style="display: none;">
+                        <input type="text" id="newMonth2" class="form-control input-field" placeholder="항목 이름을 입력하세요">
+                        <button type="button" class="add-btn" id="confirmAddMonth2">추가</button>
+                    </div>
+                    
+                    <ul class="list-container" id="month2List">
+                        <!-- 자바스크립트로 동적 생성 -->
+                    </ul>
+                    
+                    <!-- 숨겨진 필드: 서버로 전송될 데이터 -->
+                    <input type="hidden" id="month2Json" name="roadmap[1]">
+                </div>
+                
+                <!-- 3개월차 -->
+                <div class="roadmap-month">
+                    <h4>3개월차</h4>
+                    
+                    <button type="button" class="btn-add" id="addMonth3Button">
+                        <span>+ 항목 추가</span>
+                    </button>
+                    
+                    <div class="input-container" id="month3InputContainer" style="display: none;">
+                        <input type="text" id="newMonth3" class="form-control input-field" placeholder="항목 이름을 입력하세요">
+                        <button type="button" class="add-btn" id="confirmAddMonth3">추가</button>
+                    </div>
+                    
+                    <ul class="list-container" id="month3List">
+                        <!-- 자바스크립트로 동적 생성 -->
+                    </ul>
+                    
+                    <!-- 숨겨진 필드: 서버로 전송될 데이터 -->
+                    <input type="hidden" id="month3Json" name="roadmap[2]">
+                </div>
+                
+                <!-- 4개월차 -->
+                <div class="roadmap-month">
+                    <h4>4개월차</h4>
+                    
+                    <button type="button" class="btn-add" id="addMonth4Button">
+                        <span>+ 항목 추가</span>
+                    </button>
+                    
+                    <div class="input-container" id="month4InputContainer" style="display: none;">
+                        <input type="text" id="newMonth4" class="form-control input-field" placeholder="항목 이름을 입력하세요">
+                        <button type="button" class="add-btn" id="confirmAddMonth4">추가</button>
+                    </div>
+                    
+                    <ul class="list-container" id="month4List">
+                        <!-- 자바스크립트로 동적 생성 -->
+                    </ul>
+                    
+                    <!-- 숨겨진 필드: 서버로 전송될 데이터 -->
+                    <input type="hidden" id="month4Json" name="roadmap[3]">
+                </div>
+                
+                <!-- 5개월차 -->
+                <div class="roadmap-month">
+                    <h4>5개월차</h4>
+                    
+                    <button type="button" class="btn-add" id="addMonth5Button">
+                        <span>+ 항목 추가</span>
+                    </button>
+                    
+                    <div class="input-container" id="month5InputContainer" style="display: none;">
+                        <input type="text" id="newMonth5" class="form-control input-field" placeholder="항목 이름을 입력하세요">
+                        <button type="button" class="add-btn" id="confirmAddMonth5">추가</button>
+                    </div>
+                    
+                    <ul class="list-container" id="month5List">
+                        <!-- 자바스크립트로 동적 생성 -->
+                    </ul>
+                    
+                    <!-- 숨겨진 필드: 서버로 전송될 데이터 -->
+                    <input type="hidden" id="month5Json" name="roadmap[4]">
+                </div>
+                
+                <!-- 6개월차 -->
+                <div class="roadmap-month">
+                    <h4>6개월차</h4>
+                    
+                    <button type="button" class="btn-add" id="addMonth6Button">
+                        <span>+ 항목 추가</span>
+                    </button>
+                    
+                    <div class="input-container" id="month6InputContainer" style="display: none;">
+                        <input type="text" id="newMonth6" class="form-control input-field" placeholder="항목 이름을 입력하세요">
+                        <button type="button" class="add-btn" id="confirmAddMonth6">추가</button>
+                    </div>
+                    
+                    <ul class="list-container" id="month6List">
+                        <!-- 자바스크립트로 동적 생성 -->
+                    </ul>
+                    
+                    <!-- 숨겨진 필드: 서버로 전송될 데이터 -->
+                    <input type="hidden" id="month6Json" name="roadmap[5]">
+                </div>
+            </div>
+        </div>
+        
+        <!-- 교육 목표 섹션 -->
+        <div class="form-section">
+            <div class="section-title">교육 목표</div>
+            
+            <button type="button" class="btn-add" id="addGoalButton">
+                <span>+ 교육 목표 추가</span>
+            </button>
+            
+            <div class="input-container" id="goalInputContainer" style="display: none;">
+                <input type="text" id="newGoal" class="form-control input-field" placeholder="교육 목표를 입력하세요">
+                <button type="button" class="add-btn" id="confirmAddGoal">추가</button>
+            </div>
+            
+            <ul class="list-container" id="goalList">
+                <!-- 자바스크립트로 동적 생성 -->
+            </ul>
+            
+            <!-- 숨겨진 필드: 서버로 전송될 데이터 -->
+            <input type="hidden" id="goalsJson" name="educationalGoals">
+        </div>
+        
+        <!-- 버튼 영역 -->
+        <div class="btn-container">
+            <button type="button" class="btn btn-secondary">취소</button>
+            <button type="submit" class="btn btn-primary">저장하기</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // 기본 교과목 데이터
+    const initialSubjects = [
+        "JAVA", 
+        "Python", 
+        "Web language", 
+        "JSP&Servlet", 
+        "Spring Framework", 
+        "Spring Boot", 
+        "파이썬 활용 크롤링", 
+        "빅데이터 수집", 
+        "빅데이터 처리", 
+        "빅데이터 분석", 
+        "빅데이터 시각화", 
+        "실무프로젝트"
+    ];
+    
+    // 로드맵 초기 데이터
+    const initialRoadmap = {
+        month1: ["Java", "Web Front", "데이터베이스"],
+        month2: ["Spring", "Linux Server", "Vue.js"],
+        month3: ["Spring", "Python", "Web Crawling"],
+        month4: ["React.js", "빅데이터 처리, 분석"],
+        month5: ["SpringBoot", "빅데이터 시각화"],
+        month6: ["실무 프로젝트"]
+    };
+    
+    // 교육 목표 초기 데이터
+    const initialGoals = [
+        "자바와 파이썬을 기반으로 빅데이터를 수집 및 처리, 분석하여 Vue.js와 React.js를 활용하고 스프링 부트를 통한 풀스텍 웹 개발할 수 있는 개발자를 양성하는데 목표로 한다.",
+        "풀스텍 개발자 양성을 위한 프로그래밍 언어, 프레임워크, 웹 표준 언어를 통한 구현과 서버관리를 할 수 있다.",
+        "응용 프로그램 개발 요구사항을 분석하고 화면설계와 동적 웹 구현을 할 수 있다.",
+        "서버프로그램 구현, 통합구현 및 애플리케이션 배포와 패키징을 할 수 있다.",
+        "DBMS 설치 및 운영과 조작하고 데이터베이스 프로시저를 작성할 수 있다.",
+        "빅데이터 수집 및 처리 기술을 활용하여 데이터를 분석하고 웹에 적용할 수 있다.",
+        "학습내용을 기반으로 실무에서 요구되는 프로젝트 수행 능력을 함양하기 위한 프로젝트 요구사항 분석 및 설계, 프로젝트 구현, 테스트 및 배포 과정을 팀 프로젝트로 수행한다."
+    ];
+    
+    // 교과목 목록을 관리할 배열
+    let subjects = [...initialSubjects];
+    let roadmap = {
+        month1: [...initialRoadmap.month1],
+        month2: [...initialRoadmap.month2],
+        month3: [...initialRoadmap.month3],
+        month4: [...initialRoadmap.month4],
+        month5: [...initialRoadmap.month5],
+        month6: [...initialRoadmap.month6]
+    };
+    let goals = [...initialGoals];
+    
+    // DOM이 로드된 후 실행
+    document.addEventListener('DOMContentLoaded', function() {
+        // 초기화
+        initializeAll();
+        
+        // 폼 제출 이벤트
+        document.getElementById('courseEditForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 모든 데이터를 hidden 필드에 저장
+            updateAllHiddenFields();
+            
+            // 폼 데이터 수집
+            const formData = new FormData(this);
+            const formDataObj = {};
+            
+            formData.forEach((value, key) => {
+                // roadmap 데이터는 JSON으로 변환
+                if (key.startsWith('roadmap[')) {
+                    try {
+                        formDataObj[key] = JSON.parse(value);
+                    } catch (e) {
+                        formDataObj[key] = value;
+                    }
+                } else {
+                    formDataObj[key] = key === 'subjects' || key === 'educationalGoals' ? JSON.parse(value) : value;
+                }
+            });
+            
+            // 서버로 전송할 데이터 로그
+            console.log('서버로 전송할 데이터:', formDataObj);
+            
+            // 서버로 데이터 전송 (실제 구현 시 fetch/AJAX 사용)
+            alert('코스 정보가 성공적으로 저장되었습니다!');
+        });
+    });
+    
+    // 모든 데이터 초기화 및 이벤트 설정
+    function initializeAll() {
+        // 교과목 초기화
+        renderSubjects();
+        setupAddButtonEvents('Subject', 'subject');
+        
+        // 로드맵 초기화
+        for (let i = 1; i <= 6; i++) {
+            renderRoadmapMonth(i);
+            setupAddButtonEvents(`Month${i}`, `month${i}`);
+        }
+        
+        // 교육 목표 초기화
+        renderGoals();
+        setupAddButtonEvents('Goal', 'goal');
+    }
+    
+    // 버튼 이벤트 설정 함수
+    function setupAddButtonEvents(itemName, itemPrefix) {
+        // 추가 버튼 클릭 이벤트
+        document.getElementById(`add${itemName}Button`).addEventListener('click', function() {
+            document.getElementById(`${itemPrefix}InputContainer`).style.display = 'flex';
+            document.getElementById(`new${itemName}`).focus();
+        });
+        
+        // 확인 버튼 클릭 이벤트
+        document.getElementById(`confirmAdd${itemName}`).addEventListener('click', function() {
+            addNewItem(itemName, itemPrefix);
+        });
+        
+        // 입력 필드에서 Enter 키 처리
+        document.getElementById(`new${itemName}`).addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                addNewItem(itemName, itemPrefix);
+            }
+        });
+    }
+    
+    // 새 항목 추가 함수
+    function addNewItem(itemName, itemPrefix) {
+        const newItemInput = document.getElementById(`new${itemName}`);
+        const newItem = newItemInput.value.trim();
+        
+        if (newItem) {
+            // 항목 추가
+            if (itemPrefix === 'subject') {
+                if (!subjects.includes(newItem)) {
+                    subjects.push(newItem);
+                    renderSubjects();
+                } else {
+                    alert('이미 존재하는 항목입니다.');
+                }
+            } else if (itemPrefix === 'goal') {
+                if (!goals.includes(newItem)) {
+                    goals.push(newItem);
+                    renderGoals();
+                } else {
+                    alert('이미 존재하는 항목입니다.');
+                }
+            } else if (itemPrefix.startsWith('month')) {
+                const month = itemPrefix.replace('month', '');
+                if (!roadmap[`month${month}`].includes(newItem)) {
+                    roadmap[`month${month}`].push(newItem);
+                    renderRoadmapMonth(month);
+                } else {
+                    alert('이미 존재하는 항목입니다.');
+                }
+            }
+            
+            newItemInput.value = '';
+        }
+        
+        // 입력 폼 숨기기
+        document.getElementById(`${itemPrefix}InputContainer`).style.display = 'none';
+    }
+    
+    // 항목 제거 함수
+    function removeItem(itemType, index, month = null) {
+        if (itemType === 'subject') {
+            subjects.splice(index, 1);
+            renderSubjects();
+        } else if (itemType === 'goal') {
+            goals.splice(index, 1);
+            renderGoals();
+        } else if (itemType === 'roadmap') {
+            roadmap[`month${month}`].splice(index, 1);
+            renderRoadmapMonth(month);
+        }
+    }
+    
+    // 교과목 목록 렌더링 함수
+    function renderSubjects() {
+        renderListItems('subject', subjects);
+        document.getElementById('subjectsJson').value = JSON.stringify(subjects);
+    }
+    
+    // 교육 목표 렌더링 함수
+    function renderGoals() {
+        renderListItems('goal', goals);
+        document.getElementById('goalsJson').value = JSON.stringify(goals);
+    }
+    
+    // 로드맵 월별 렌더링 함수
+    function renderRoadmapMonth(month) {
+        renderListItems(`month${month}`, roadmap[`month${month}`], month);
+        document.getElementById(`month${month}Json`).value = JSON.stringify(roadmap[`month${month}`]);
+    }
+    
+    // 리스트 항목 렌더링 공통 함수
+    function renderListItems(itemType, items, month = null) {
+        const listId = itemType === 'subject' ? 'subjectList' : 
+                      itemType === 'goal' ? 'goalList' : 
+                      `${itemType}List`;
+        
+        const list = document.getElementById(listId);
+        list.innerHTML = '';
+        
+        items.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.className = 'list-item';
+            
+            const span = document.createElement('span');
+            span.textContent = item;
+            
+            const actions = document.createElement('div');
+            actions.className = 'item-actions';
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'btn-remove';
+            removeBtn.innerHTML = '&times;';
+            removeBtn.setAttribute('type', 'button');
+            removeBtn.onclick = function() {
+                if (itemType === 'subject') {
+                    removeItem('subject', index);
+                } else if (itemType === 'goal') {
+                    removeItem('goal', index);
+                } else if (itemType.startsWith('month')) {
+                    removeItem('roadmap', index, month);
+                }
+            };
+            
+            actions.appendChild(removeBtn);
+            li.appendChild(span);
+            li.appendChild(actions);
+            list.appendChild(li);
+        });
+    }
+    
+   
+// 모든 hidden 필드 업데이트
+function updateAllHiddenFields() {
+        // 교과목 JSON
+        document.getElementById('subjectsJson').value = JSON.stringify(subjects);
+        
+        // 교육 목표 JSON
+        document.getElementById('goalsJson').value = JSON.stringify(goals);
+        
+        // 로드맵 JSON
+        for (let i = 1; i <= 6; i++) {
+            document.getElementById(`month${i}Json`).value = JSON.stringify(roadmap[`month${i}`]);
+        }
+    }
+    
+    // Shift + Enter로 줄바꿈 처리 (textArea용)
+    document.querySelectorAll('textarea').forEach(textarea => {
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.shiftKey) {
+                e.preventDefault();
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                const value = this.value;
+                this.value = value.substring(0, start) + '\n' + value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 1;
+            }
+        });
+    });
+    
+    // 문자열 입력 필드의 길이 제한 처리
+    document.querySelectorAll('input[type="text"], textarea').forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.maxLength > 0 && this.value.length > this.maxLength) {
+                this.value = this.value.substring(0, this.maxLength);
+            }
+        });
+    });
+    
+    // 취소 버튼 클릭 시 이전 페이지로 이동
+    document.querySelector('.btn-secondary').addEventListener('click', function() {
+        if(confirm('변경 사항이 저장되지 않습니다. 정말 취소하시겠습니까?')) {
+            window.history.back();
+        }
+    });
+    
+    // 항목 드래그 앤 드롭 기능 (향후 구현)
+    function enableDragAndDrop() {
+        // 드래그 앤 드롭 기능 구현 (옵션)
+        // Sortable.js 또는 HTML5 Drag and Drop API 사용 가능
+    }
+    
+    // 폼 유효성 검사
+    function validateForm() {
+        let isValid = true;
+        
+        // 필수 입력 필드 검사
+        const requiredFields = ['courseName', 'courseDescription', 'startDate'];
+        
+        requiredFields.forEach(field => {
+            const input = document.getElementById(field);
+            if (!input.value.trim()) {
+                input.classList.add('invalid');
+                isValid = false;
+                
+                // 오류 메시지 표시
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'error-message';
+                errorMsg.textContent = '필수 입력 항목입니다.';
+                
+                // 기존 오류 메시지 제거
+                const existingError = input.parentNode.querySelector('.error-message');
+                if (existingError) existingError.remove();
+                
+                input.parentNode.appendChild(errorMsg);
+            } else {
+                input.classList.remove('invalid');
+                const existingError = input.parentNode.querySelector('.error-message');
+                if (existingError) existingError.remove();
+            }
+        });
+        
+        // 최소 항목 개수 검사
+        if (subjects.length === 0) {
+            alert('최소 1개 이상의 교과목을 입력해주세요.');
+            isValid = false;
+        }
+        
+        if (goals.length === 0) {
+            alert('최소 1개 이상의 교육 목표를 입력해주세요.');
+            isValid = false;
+        }
+        
+        return isValid;
+    }
+    
+    
+    // 페이지 벗어날 때 확인
+    window.addEventListener('beforeunload', function(e) {
+        // 변경사항이 있는 경우에만 경고
+        const formChanged = true; // 실제로는 변경사항 감지 로직 필요
+        
+        if (formChanged) {
+            e.preventDefault();
+            e.returnValue = '변경사항이 저장되지 않았습니다. 정말 나가시겠습니까?';
+            return e.returnValue;
+        }
+    });
+</script>
+</body>
+</html>
