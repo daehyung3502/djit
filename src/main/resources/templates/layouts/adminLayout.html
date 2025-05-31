@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{/fragments/adminConfig :: ConfigFragment}" />
 
 
 <body>
     <div class="admin-layout">
-        <header th:replace="~{/fragments/adminHeader :: HeaderFragment}" />
-        <th:block th:replace="~{/fragments/adminSidebar :: SidebarFragment}"></th:block>
+        <header th:replace="~{/fragments/adminHeader :: HeaderFragment}"></header>
+        <th:block sec:authorize="isAuthenticated()">
+		    <th:block th:replace="~{/fragments/adminSidebar :: SidebarFragment}"></th:block>
+		</th:block>
         <main class="main-content">
             <th:block layout:fragment="Content"></th:block>
         </main>
@@ -16,4 +18,6 @@
     
    
 </body>
+
+
 </html>

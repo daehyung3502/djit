@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:fragment="HeaderFragment">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:fragment="HeaderFragment" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <link rel="stylesheet" th:href="@{/css/adminHeader.css}">
     <header class="header">
         <div class="d-flex align-items-center">
@@ -8,7 +8,7 @@
                 중앙능력개발원 관리자 페이지
             </div>
         </div>
-        <a href="/admin/logout" class="logout-btn">
+        <a sec:authorize="isAuthenticated()" href="/admin/logout" class="logout-btn">
             <i class="fas fa-sign-out-alt"></i>
             로그아웃
         </a>

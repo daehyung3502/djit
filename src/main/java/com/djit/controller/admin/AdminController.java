@@ -36,7 +36,6 @@ public class AdminController {
 	public AdminController(AdminService adminService) {
 		this.adminService = adminService;
 	}
-
 	@GetMapping("/list")
 	public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
 		LOGGER.info("Admin list page");
@@ -128,7 +127,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/courseModifyDetail/{id}")
-	public String courseModifyDetail(Long id) {
+	public String courseModifyDetail(@PathVariable("id") Long id) {
 		LOGGER.info("Admin courseModifyDetail page");
 		return "/admin/courseModifyDetail";
 	}
@@ -138,5 +137,6 @@ public class AdminController {
 		LOGGER.info("Admin login page");
 		return "/admin/login";
 	}
+	
 
 }

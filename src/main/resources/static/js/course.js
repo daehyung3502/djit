@@ -2,25 +2,7 @@ $(document).ready(function () {
        
              
        
-               $(".toggle-menu").click(function () {
-                   $(this).toggleClass("active");
-                   let $nav = $("nav");
-       
-                   if ($nav.is(":hidden")) {
-                       $nav
-                           .stop()
-                           .slideDown(400);
-                       $("body").css("overflow", "hidden");
-                   } else {
-                       $nav
-                           .stop()
-                           .slideUp(400, function () {
-                               $(this).css('display', 'none');
-                               $("body").css("overflow", "auto");
-                           });
-                   }
-                   $("#toggle-1").prop("checked", !$("#toggle-1").prop("checked"));
-               });
+               
        
                if ($(window).width() <= 1070 && $("nav").is(":visible")) {
                    $("body").css("overflow", "hidden");

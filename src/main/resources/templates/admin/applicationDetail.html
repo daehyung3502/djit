@@ -14,9 +14,9 @@
                     <span
                         class="badge"
                         th:classappend="${applicationResponseDto.consultation?.number != null ? 'badge-scheduled' : 'badge-pending'}"
-                        th:text="${applicationResponseDto.consultation?.number != null ? '상담 예약 완료' : '상담 대기 중'}" />
+                        th:text="${applicationResponseDto.consultation?.number != null ? '상담 예약 완료' : '상담 대기 중'}"></span>
                 </h1>
-                <div class="subtitle" th:text="${applicationResponseDto.subjectName}" />
+                <div class="subtitle" th:text="${applicationResponseDto.subjectName}"></div>
             </div>
 
             <div class="content">
