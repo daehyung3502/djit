@@ -1,20 +1,46 @@
 package com.djit.config;
 
+import com.djit.entity.Admin;
 import com.djit.entity.Course;
+import com.djit.entity.Portfolio;
+import com.djit.repository.application.AdminRepository;
 import com.djit.repository.application.CourseRepository;
+import com.djit.repository.application.PortfolioRepository;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Configuration
 public class DataInitializer {
 
+    @Value("${app.admin.username}")
+    private String adminUsername;
+    
+    @Value("${app.admin.password}")
+    private String adminPassword;
+
+    
+
     @Bean
-    public CommandLineRunner initData(CourseRepository courseRepository) {
+    public CommandLineRunner initData(CourseRepository courseRepository, PortfolioRepository portfolioRepository ,  AdminRepository adminRepository,
+    PasswordEncoder passwordEncoder) {
         return args -> {
+
+            if (adminRepository.findByUsername(adminUsername).isEmpty()) {
+                Admin admin = new Admin();
+                admin.setUsername(adminUsername);
+                admin.setPassword(passwordEncoder.encode(adminPassword));
+                admin.setRole("ADMIN");
+                adminRepository.save(admin);
+                System.out.println("관리자 계정 생성 완료: " + adminUsername);
+            }
 
             if (courseRepository.count() == 0) {
                 Course courseA = new Course();
@@ -154,6 +180,49 @@ public class DataInitializer {
                 
                 
             }
+            if (portfolioRepository.count() == 0) {
+            Portfolio portfolio1 = new Portfolio();
+            portfolio1.setTitle("서강대학교 LINC사업단 홈페이지 구축");
+            portfolio1.setGithubUrl("https://github.com/SilverCastle123/project");
+            portfolio1.setImageUrl("/images/github1.png");
+            portfolio1.setCreatedAt(LocalDateTime.now());
+            portfolio1.setUpdatedAt(LocalDateTime.now());
+            
+            Portfolio portfolio2 = new Portfolio();
+            portfolio2.setTitle("광주 남구 통합도서관 홈페이지 개편");
+            portfolio2.setGithubUrl("https://github.com/ParkCheolSun/Library_project");
+            portfolio2.setImageUrl("/images/github2.png");
+            portfolio2.setCreatedAt(LocalDateTime.now());
+            portfolio2.setUpdatedAt(LocalDateTime.now());
+            
+            Portfolio portfolio3 = new Portfolio();
+            portfolio3.setTitle("청년 맞춤형 온라인 취업지원사업");
+            portfolio3.setGithubUrl("https://github.com/EODOHA/youth");
+            portfolio3.setImageUrl("/images/github3.png");
+            portfolio3.setCreatedAt(LocalDateTime.now());
+            portfolio3.setUpdatedAt(LocalDateTime.now());
+            
+            Portfolio portfolio4 = new Portfolio();
+            portfolio4.setTitle("축제 통합 홍보 페이지 프로젝트");
+            portfolio4.setGithubUrl("https://github.com/gicheol1/Project_Git");
+            portfolio4.setImageUrl("/images/github4.png");
+            portfolio4.setCreatedAt(LocalDateTime.now());
+            portfolio4.setUpdatedAt(LocalDateTime.now());
+            
+            Portfolio portfolio5 = new Portfolio();
+            portfolio5.setTitle("부산 오페라하우스 콘서트홀 통합운영시스템");
+            portfolio5.setGithubUrl("https://github.com/Younglan/cantata");
+            portfolio5.setImageUrl("/images/github5.png");
+            portfolio5.setCreatedAt(LocalDateTime.now());
+            portfolio5.setUpdatedAt(LocalDateTime.now());
+            
+            portfolioRepository.save(portfolio1);
+            portfolioRepository.save(portfolio2);
+            portfolioRepository.save(portfolio3);
+            portfolioRepository.save(portfolio4);
+            portfolioRepository.save(portfolio5);
+        }
+    
         };
     }
 }

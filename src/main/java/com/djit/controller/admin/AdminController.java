@@ -4,11 +4,17 @@ import com.djit.dto.admin.ApplicationSummaryDto;
 import com.djit.dto.admin.CalendarDto;
 import com.djit.dto.admin.ConsultationDto;
 import com.djit.dto.admin.ConsultationResponseDto;
+import com.djit.dto.admin.CourseDetailDto;
 import com.djit.dto.admin.CourseDto;
+import com.djit.dto.admin.PortfolioDto;
 import com.djit.dto.client.ApplicationModifyDto;
+import com.djit.service.FileUploadService;
 import com.djit.service.admin.AdminService;
-import jakarta.servlet.http.HttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -21,21 +27,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class AdminController {
 	private final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
 	private final AdminService adminService;
+	private final FileUploadService fileUploadService;
 
-	public AdminController(AdminService adminService) {
-		this.adminService = adminService;
-	}
+
 	@GetMapping("/list")
 	public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
 		LOGGER.info("Admin list page");
@@ -46,17 +54,17 @@ public class AdminController {
 		model.addAttribute("list", ApplicationSummaryDto);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
-		return "/admin/list";
+		return "admin/list";
 	}
 
 	@GetMapping("/applicationDetail/{number}")
-	public String applicationDetail(@PageableDefault(page = 1) Pageable pageable, @PathVariable Long number,
+	public String applicationDetail(@PageableDefault(page = 1) Pageable pageable, @PathVariable("number") Long number,
 			Model model) {
 		LOGGER.info(number + " : number 값 확인");
 		ApplicationResponseDto applicationResponseDto = adminService.getApplication(number);
 		model.addAttribute("applicationResponseDto", applicationResponseDto);
 		model.addAttribute("pageable", pageable);
-		return "/admin/applicationDetail";
+		return "admin/applicationDetail";
 	}
 
 	@PostMapping("/consultation")
@@ -70,7 +78,7 @@ public class AdminController {
 	}
 	
 	@DeleteMapping("/consultation/{id}")
-	public ResponseEntity<Void> deleteConsultation(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteConsultation(@PathVariable("id") Long id) {
 		LOGGER.info("예약 삭제");
 		LOGGER.info("삭제할 정보" + id);
 		adminService.deleteConsultation(id);
@@ -79,19 +87,19 @@ public class AdminController {
 	}
 
 	@GetMapping("/applicationModify/{id}")
-	public String applicationModify(@PageableDefault(page = 1) Pageable pageable, @PathVariable Long id, Model model){
+	public String applicationModify(@PageableDefault(page = 1) Pageable pageable, @PathVariable("id") Long id, Model model){
 		LOGGER.info("Admin applicationModify page");
 		LOGGER.info(id + " : number 값 확인");
 		LOGGER.info(pageable.getPageNumber() + " : pageable 값 확인");
 		ApplicationResponseDto applicationResponseDto = adminService.getApplication(id);
 		model.addAttribute("applicationResponseDto", applicationResponseDto);
 		model.addAttribute("pageable", pageable);
-		return "/admin/applicationModify";
+		return "admin/applicationModify";
 
 	}
 
 	@PostMapping("/applicationModify/{id}")
-	public ResponseEntity<Map<String, Long>> applicationModify(@PathVariable Long id, @RequestBody ApplicationModifyDto applicationModifyDto) {
+	public ResponseEntity<Map<String, Long>> applicationModify(@PathVariable("id") Long id, @RequestBody ApplicationModifyDto applicationModifyDto) {
 		LOGGER.info("Admin applicationModify update page");
 		LOGGER.info(id + " : number 값 확인");
 		adminService.modifyApplication(applicationModifyDto, id);
@@ -99,7 +107,7 @@ public class AdminController {
 		return ResponseEntity.ok(responseBody);
 	}
 	@DeleteMapping("/applicationModify/{id}")
-	public ResponseEntity<Void> deleteApplication(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteApplication(@PathVariable("id") Long id) {
 		LOGGER.info("Admin applicationModify delete page");
 		LOGGER.info(id + " : number 값 확인");
 		adminService.deleteApplication(id);
@@ -114,7 +122,7 @@ public class AdminController {
 
 		CalendarDto calendarDto = adminService.generateCalendarData(year, month);
 		model.addAttribute("calendarData", calendarDto);
-		return "/admin/calendar";
+		return "admin/calendar";
 	}
 
 	@GetMapping("/courseModify")
@@ -123,19 +131,65 @@ public class AdminController {
 		List<CourseDto> courses = adminService.getCourses();
 		LOGGER.info(courses.toString() + " : courses 값 확인");
 		model.addAttribute("courses", courses);
-		return "/admin/courseModify";
+		return "admin/courseModify";
 	}
 
 	@GetMapping("/courseModifyDetail/{id}")
-	public String courseModifyDetail(@PathVariable("id") Long id) {
+	public String courseModifyDetail(@PathVariable("id") Long id, Model model) {
 		LOGGER.info("Admin courseModifyDetail page");
-		return "/admin/courseModifyDetail";
+		CourseDetailDto courseDetail = adminService.getCourseDetailById(id);
+		model.addAttribute("courseDetail", courseDetail);
+    
+    return "admin/courseModifyDetail";
+}
+
+	@PostMapping("/courseModifyDetail/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> updateCourseDetail(@PathVariable("id") Long id, @RequestBody CourseDetailDto courseDetailDto) {
+		LOGGER.info("코스 상세 수정: " + id);
+		courseDetailDto.setId(id);
+		LOGGER.info("코스 상세 정보: " + courseDetailDto.toString());
+		adminService.updateCourseDetail(courseDetailDto);
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", true);
+		response.put("message", "코스가 성공적으로 업데이트되었습니다.");
+		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("/login")
 	public String login() {
 		LOGGER.info("Admin login page");
-		return "/admin/login";
+		return "admin/login";
+	}
+
+	@GetMapping("/portfolio")
+	public String portfolio(Model model) {
+		LOGGER.info("Admin portfolio page");
+		List<PortfolioDto> portfolios = adminService.getAllPortfolios();
+    	model.addAttribute("portfolios", portfolios);
+		return "admin/portfolio";
+	}
+
+	@PostMapping("/portfolio/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> updatePortfolio(@PathVariable("id") Long id, @ModelAttribute PortfolioDto portfolioDto) {
+		LOGGER.info("포트폴리오 업데이트: {}", id);
+		portfolioDto.setId(id);
+		Map<String, Object> response = new HashMap<>();
+		try {
+			adminService.updatePortfolio(portfolioDto);
+			
+			response.put("success", true);
+			response.put("message", "포트폴리오가 성공적으로 업데이트되었습니다.");
+			return ResponseEntity.ok(response);
+			
+		} catch (Exception e) {
+			LOGGER.error("포트폴리오 업데이트 실패: {}", e.getMessage());
+			response.put("success", false);
+			response.put("message", e.getMessage());
+			return ResponseEntity.status(500).body(response);
+		}
 	}
 	
 

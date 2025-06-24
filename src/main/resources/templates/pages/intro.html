@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{/layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
+    layout:decorate="~{layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
 
     <head>
         <title>교육원소개</title>
@@ -83,10 +83,10 @@
                 </div>
 
             </div>
-            <div class="mapTop">
-                <span>위치</span>
-                안내</div>
-            <div class="mapInfo">MapInfo 구글 맵 api</div>
+            <div class="vision">
+                <span>비전</span>
+                </div>
+                <div class="vision-image" th:style="'background-image: url(' + @{/images/vision.jpg} + ');'"></div>
           
 
         	<script th:src="@{/js/intro.js}"></script>

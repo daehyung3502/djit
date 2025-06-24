@@ -1,0 +1,97 @@
+:root {
+    --primary-color: #000000;  
+    --secondary-color: #2980b9;
+    --text-color: #333;
+    --light-text: #666;
+    --border-color: #e0e0e0;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+}
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+.portfolio-list { 
+    margin-top: 20px; 
+}
+.portfolio-item { 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 20px; 
+    margin-bottom: 20px; 
+    background: #f9f9f9; 
+}
+.portfolio-info h3 { 
+    margin-top: 0; 
+    color: #333; 
+}
+.portfolio-actions { 
+    margin-top: 15px; 
+}
+.btn { 
+    padding: 8px 16px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    margin-right: 10px; 
+}
+.btn-warning { 
+    background: #38af5a; 
+    color: #fff !important;
+}
+.btn-warning:hover {
+    background: #2e8b47 !important;  
+    color: #fff !important;
+}
+.btn-secondary { 
+    background: #6c757d; 
+    color: #fff; 
+}
+.btn-primary { 
+    background: #007bff; 
+    color: #fff; 
+}
+.edit-form { 
+    margin-top: 20px; 
+    padding: 20px; 
+    background: #fff; 
+    border-radius: 8px; 
+    border: 1px solid #ccc; 
+    display: none;
+}
+.form-group { 
+    margin-bottom: 15px; 
+}
+.form-group label { 
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
+}
+.form-control { 
+    width: 100%; 
+    padding: 8px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    box-sizing: border-box;
+}
+.btn-container { 
+    margin-top: 20px; 
+}
+.current-image {
+    max-width: 150px;
+    max-height: 100px;
+    margin-left: 10px;
+    border-radius: 4px;
+}
+.image-preview { 
+    max-width: 200px; 
+    max-height: 150px; 
+    margin-top: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+}
+.portfolio-info a {
+    text-decoration: none;
+    color: #007bff;
+}

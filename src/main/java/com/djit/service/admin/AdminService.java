@@ -10,7 +10,9 @@ import com.djit.dto.admin.ApplicationSummaryDto;
 import com.djit.dto.admin.CalendarDto;
 import com.djit.dto.admin.ConsultationDto;
 import com.djit.dto.admin.ConsultationResponseDto;
+import com.djit.dto.admin.CourseDetailDto;
 import com.djit.dto.admin.CourseDto;
+import com.djit.dto.admin.PortfolioDto;
 import com.djit.dto.client.ApplicationModifyDto;
 
 
@@ -30,6 +32,13 @@ public interface AdminService {
 	void deleteApplication(Long number);
 
 	List<CourseDto> getCourses();
+
+	CourseDetailDto getCourseDetailById(Long id);
+
+	void updateCourseDetail(CourseDetailDto courseDetailDto);
 	
+	List<PortfolioDto> getAllPortfolios();
+	
+    void updatePortfolio(PortfolioDto portfolioDto);
 	
 }

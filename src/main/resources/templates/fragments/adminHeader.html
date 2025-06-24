@@ -8,9 +8,13 @@
                 중앙능력개발원 관리자 페이지
             </div>
         </div>
-        <a sec:authorize="isAuthenticated()" href="/admin/logout" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i>
-            로그아웃
-        </a>
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/admin/logout}" method="post" class="logout-form">
+                <button type="submit" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    로그아웃
+                </button>
+            </form>
+        </div>
     </header>
 </html>

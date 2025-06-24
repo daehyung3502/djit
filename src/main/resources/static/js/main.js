@@ -173,16 +173,7 @@ let myswiper = new Swiper(".mySwiper", {
         disableOnInteraction: false // 사용자 상호작용 후에도 자동 재생 유지
     },
     
-    loop: true // 무한 루프 활성화
+    
+    loop: true 
 });
 
-// ==================== 탭 링크 이동 처리 ====================
-$(document).ready(function () {
-    // 상세 링크 클릭 처리 (djCourse.html의 data-tab 속성 활용)
-    $('.detail-link').click(function(e) {
-        e.preventDefault(); // 기본 동작(a 태그의 페이지 이동) 막기
-        let targetTab = $(this).data('tab'); // 클릭된 요소의 data-tab 속성 값 (bigdata, cloud, sw) 가져오기
-        let targetUrl = 'course.html?tab=' + targetTab; // 이동할 URL 생성 (djitCourse.html?tab=bigdata)
-        window.location.href = targetUrl; // 페이지 이동
-    });
-});

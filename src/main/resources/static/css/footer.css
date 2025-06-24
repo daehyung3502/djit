@@ -13,11 +13,11 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 40px; /* Increased gap for better spacing with fewer sections */
+    gap: 40px; 
 }
 
 .footer-section {
-    flex: 1 1 300px; /* Increased min-width for better balance with two sections */
+    flex: 1 1 300px; 
 }
 
 .footer-section h2 {
@@ -28,7 +28,7 @@
 }
 
 .footer-section.about {
-    flex: 2 1 400px; /* Give the about section more space */
+    flex: 2 1 400px; 
 }
 
 .footer-section.about .logo-text {
@@ -99,7 +99,7 @@
     border-top: 1px solid #555;
     padding: 15px 0;
     font-size: 0.8em;
-    margin-top: 20px; /* Added margin for better separation */
+    margin-top: 20px; 
 }
 
 .footer-bottom p {
@@ -112,10 +112,6 @@
     transition: color 0.3s ease;
 }
 
-.footer-bottom a:hover {
-    color: #4CAF50;
-    text-decoration: underline;
-}
 
 @media (max-width: 768px) {
     .footer-content {

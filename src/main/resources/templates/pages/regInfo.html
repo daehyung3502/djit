@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{/layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
+    layout:decorate="~{layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
 
     <head>
         <title>입학안내</title>
@@ -138,9 +138,14 @@
             <div class="mapInfo">
 
                 <div class="map-container">
-                    <h2>오시는 길</h2>
+                   
                     <div class="map-placeholder">
-                        구글 지도가 여기에 표시됩니다
+                        <iframe
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        th:src="@{'https://www.google.com/maps/embed/v1/place?key=' + ${@environment.getProperty('app.google.maps.api-key')} + '&q=place_id:ChIJTXHQIulJZTURHvbe8TOjen0'}">
+                      </iframe>
                     </div>
                     <div class="address-info">
                         <p>

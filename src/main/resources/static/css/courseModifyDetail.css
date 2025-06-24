@@ -234,7 +234,7 @@ h1 {
 
 .input-field {
     flex-grow: 1;
-    min-width: 0; /* 이것이 중요: flex item이 너무 커지는 것을 방지 */
+    min-width: 0; 
 }
 
 .add-btn {

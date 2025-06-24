@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-<head th:replace="~{/fragments/adminConfig :: ConfigFragment}" />
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<head th:replace="~{fragments/adminConfig :: ConfigFragment}" />
 
 
 <body>
     <div class="admin-layout">
-        <header th:replace="~{/fragments/adminHeader :: HeaderFragment}"></header>
+        <header th:replace="~{fragments/adminHeader :: HeaderFragment}"></header>
         <th:block sec:authorize="isAuthenticated()">
-		    <th:block th:replace="~{/fragments/adminSidebar :: SidebarFragment}"></th:block>
+		    <th:block th:replace="~{fragments/adminSidebar :: SidebarFragment}"></th:block>
 		</th:block>
         <main class="main-content">
             <th:block layout:fragment="Content"></th:block>

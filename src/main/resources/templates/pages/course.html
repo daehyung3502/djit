@@ -1,690 +1,190 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{/layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
+    layout:decorate="~{layouts/layout}" layout:fragment="Content" th:with="bannerType='default2'">
 
     <head>
         <title>교육과정</title>
         <link rel="stylesheet" th:href="@{/css/course.css}">
     </head>
     <body>
-            <div class="courseTop"></div>
-            <div class="courseMain">
-                <div class="container">
-                    <div class="vertical-tabs-container">
-                        <div class="nav-subjects">
-                            <div class="subject-tab active" data-subject="bigdata">빅데이터융합 스프링부트 (자바&파이썬)<br>
-                                응용 SW 개발자</div>
-                            <div class="subject-tab" data-subject="cloud">클라우드기반 풀스텍 개발과 빅데이터 분석 서비스 구현을 위한 전문가 양성과정</div>
-                            <div class="subject-tab" data-subject="sw">풀 스텍 SW 엔지니어링&디지털<br>
-                                트랜스포메이션 과정</div>
+        <div class="courseTop"></div>
+        <div class="courseMain">
+            <div class="container">
+                <div class="vertical-tabs-container">
+                    <div class="nav-subjects">
+                        <div th:each="course, iterStat : ${courseDetails}" 
+                             th:class="${(selectedCourseId != null and selectedCourseId == course.id) ? 'subject-tab active' : (iterStat.first and selectedCourseId == null) ? 'subject-tab active' : 'subject-tab'}"
+                             th:data-subject="'course' + ${course.id}"
+                             th:text="${course.courseName}">
                         </div>
+                    </div>
 
-                        <div id="bigdata" class="subject-info active">
-                            <div class="couresName">빅데이터융합 스프링부트 (자바&파이썬) 응용 SW 개발자</div>
-                            <div class="courseNameSeparate"></div>
-                            <div class="couresText1">
-                                <strong>"스프링 부트로 강력한 풀스텍 웹을 만들어가는 학습의 즐거움을 경험하세요!"</strong>
-                            </div>
-                            <div class="couresText2">자바와 파이썬 프로그래밍 언어를 기반으로 응용 프로그램 개발 요구사항을 분석하여 화면설계 및
-                                DBMS 설치 및 운영 조작하고 데이터베이스 프로시저를 작성하고<br>
-                                빅데이터 수집 및 처리 기술을 활용하여 데이터를 분석하고 Vue.js와 React.js를 활용하고 스프링 부트을 통한 풀스텍 웹을 구현 할 수
-                                있있도록 학습한다.</div>
-                            <div class="couresRoadmap">
-                                <div class="roadmap-container">
-                                    <div class="roadmap-item">
-                                        <div class="month">1개월차</div>
-                                        <div class="content">
-                                            Java<br>
-                                            Web Front<br>
-                                            데이터베이스
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">2개월차</div>
-                                        <div class="content">
-                                            Spring<br>
-                                            Linux Server<br>
-                                            Vue.js
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">3개월차</div>
-                                        <div class="content">
-                                            Spring<br>
-                                            Python<br>
-                                            Web Crawling
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">4개월차</div>
-                                        <div class="content">
-                                            React.js<br>
-                                            빅데이터 처리, 분석
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">5개월차</div>
-                                        <div class="content">
-                                            SpringBoot<br>
-                                            빅데이터 시각화
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">6개월차</div>
-                                        <div class="content">
-                                            실무 프로젝트
-                                        </div>
+                    <!-- 각 코스의 상세 정보 -->
+                    <div th:each="course, iterStat : ${courseDetails}" 
+                         th:id="'course' + ${course.id}" 
+                         th:class="${(selectedCourseId != null and selectedCourseId == course.id) ? 'subject-info active' : (iterStat.first and selectedCourseId == null) ? 'subject-info active' : 'subject-info'}">
+                        
+                        <div class="couresName" th:text="${course.courseName}"></div>
+                        <div class="courseNameSeparate"></div>
+                        <div class="couresText1">
+                            <strong th:text="'&quot;' + ${course.courseTagline} + '&quot;'"></strong>
+                        </div>
+                        <div class="couresText2" th:text="${course.courseDescription}"></div>
+                        
+                        <!-- 로드맵 -->
+                        <div class="couresRoadmap">
+                            <div class="roadmap-container">
+                                <div class="roadmap-item" th:if="${course.roadmapMonth1 != null and !course.roadmapMonth1.isEmpty()}">
+                                    <div class="month">1개월차</div>
+                                    <div class="content">
+                                        <span th:each="item, itemStat : ${course.roadmapMonth1}" 
+                                              th:utext="${item} + ${!itemStat.last ? '<br>' : ''}"></span>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="courseInfo">
-                                <div class="courseInfoContainer">
-                                    <div class="info-box">
-                                        <h2>개강 시기</h2>
-                                        <p>2025년 05월 12일</p>
-                                    </div>
-
-                                    <div class="info-box">
-                                        <h2>교육 기간</h2>
-                                        <p>6개월 900시간(1일 8교시)</p>
-                                    </div>
-
-                                    <div class="info-box">
-                                        <h2>교육 시간</h2>
-                                        <p>09:00 ~ 17:30(야간 실습실 개방)</p>
-                                    </div>
-
-                                    <div class="info-box">
-                                        <h2>주요 교과</h2>
-                                        <p>주요교과 : JAVA, Python, Web language, JSP&Servlet, Spring Framework, Spring
-                                            Boot, 파이썬 활용 크롤링, 빅데이터 수집, 처리, 분석, 시각화, 실무프로젝트</p>
+                                <div class="roadmap-item" th:if="${course.roadmapMonth2 != null and !course.roadmapMonth2.isEmpty()}">
+                                    <div class="month">2개월차</div>
+                                    <div class="content">
+                                        <span th:each="item, itemStat : ${course.roadmapMonth2}" 
+                                              th:utext="${item} + ${!itemStat.last ? '<br>' : ''}"></span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="benefits">
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">01
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">교육 목표</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            - 자바와 파이썬을 기반으로
-                                            <strong>빅데이터</strong>를 수집 및 처리, 분석하여 Vue.js와 React.js를 활용하고
-                                            <strong>스프링 부트</strong>를 통한 풀스텍 웹 개발할 수 있는 개발자를 양성하는데<br> 목표로 한다.
-                                        </li>
-                                        <li>
-                                            -
-                                            <strong>풀스텍 개발자</strong>
-                                            양성을 위한 프로그래밍 언어, 프레임워크, 웹 표준 언어를 통한 구현과 서버관리를 할 수 있다.
-                                        </li>
-                                        <li>
-                                            - 응용 프로그램 개발 요구사항을 분석하고 화면설계와
-                                            <strong>동적 웹</strong>
-                                            구현을 할 수 있다.
-                                        </li>
-                                        <li>
-                                            - 서버프로그램 구현, 통합구현 및
-                                            <strong>애플리케이션 배포</strong>와 패키징을 할 수 있다.
-                                        </li>
-                                        <li>
-                                            -
-                                            <strong>DBMS 설치</strong>
-                                            및 운영과 조작하고 데이터베이스 프로시저를 작성할 수 있다.
-                                        </li>
-                                        <li>
-                                            -
-                                            <strong>빅데이터</strong>
-                                            수집 및 처리 기술을 활용하여 데이터를 분석하고 웹에 적용할 수 있다.
-                                        </li>
-                                        <li>
-                                            - 학습내용을 기반으로 실무에서 요구되는
-                                            <strong>프로젝트 수행 능력</strong>을 함양하기 위한 프로젝트 요구사항 분석 및 설계, 프로젝트 구현, 테스트 및 배포 과정을<br> 팀 프로젝트로 수행한다.
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">02
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">교육 시설</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            -
-                                            <strong>전용 강의실, 휴게실</strong>
-                                            등 쾌적한 교육 인프라 제공</li>
-                                        <li>
-
-                                            -
-                                            <strong>방과 후 실습실 개방</strong>
-                                            (22:00까지)
-                                            <ul>
-                                                <li>개인 보충 학습</li>
-                                                <li>정보처리기사 대비 특강</li>
-                                                <li>팀 프로젝트 지도</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-
-                                            -
-                                            <strong>최신 장비</strong>: Intel i5, 8G RAM, 1TB HDD, Geforce GTX 760, 27인치 모니터</li>
-                                    </ul>
-                                </div>
-
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">03
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">프로젝트 중심 학습</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            - 현업 실무 프로젝트 또는 팀별 프로젝트 과제 선정 및 수행
-                                            <ul>
-                                                <li>기업 실무 프로젝트 주제 선정, 실무자 기술 멘토 참여</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-
-                                            -
-                                            <strong>프로젝트 발표</strong>: 기획, 분석, 설계, 구현, 테스트, 배포 결과 발표로 실무 능력 검증
-                                            <ul>
-                                                <li>현업 실무 기술 멘토 참여</li>
-                                                <li>자기 주도적 학습 능력 배양, 포트폴리오 제작</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">04
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">취업 지원</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            -
-                                            <strong>면접 클리닉</strong>: 이력서 작성법, 면접 요령, 커뮤니케이션 스킬 습득</li>
-                                        <li>
-
-                                            - 대전, 세종, 수도권 관련 기업과 산학 채용 네트워크 구축,
-                                            <strong>취업 연계</strong>
-                                        </li>
-                                    </ul>
-                                    <div class="itButtons">
-
-                                        <a th:href="@{/pages/regApp}" class="detail-link itButton1">
-                                            온라인접수
-                                            <i class="fa fa-arrow-right"></i>
-                                        </a>
+                                <div class="roadmap-item" th:if="${course.roadmapMonth3 != null and !course.roadmapMonth3.isEmpty()}">
+                                    <div class="month">3개월차</div>
+                                    <div class="content">
+                                        <span th:each="item, itemStat : ${course.roadmapMonth3}" 
+                                              th:utext="${item} + ${!itemStat.last ? '<br>' : ''}"></span>
                                     </div>
                                 </div>
-
+                                <div class="roadmap-item" th:if="${course.roadmapMonth4 != null and !course.roadmapMonth4.isEmpty()}">
+                                    <div class="month">4개월차</div>
+                                    <div class="content">
+                                        <span th:each="item, itemStat : ${course.roadmapMonth4}" 
+                                              th:utext="${item} + ${!itemStat.last ? '<br>' : ''}"></span>
+                                    </div>
+                                </div>
+                                <div class="roadmap-item" th:if="${course.roadmapMonth5 != null and !course.roadmapMonth5.isEmpty()}">
+                                    <div class="month">5개월차</div>
+                                    <div class="content">
+                                        <span th:each="item, itemStat : ${course.roadmapMonth5}" 
+                                              th:utext="${item} + ${!itemStat.last ? '<br>' : ''}"></span>
+                                    </div>
+                                </div>
+                                <div class="roadmap-item" th:if="${course.roadmapMonth6 != null and !course.roadmapMonth6.isEmpty()}">
+                                    <div class="month">6개월차</div>
+                                    <div class="content">
+                                        <span th:each="item, itemStat : ${course.roadmapMonth6}" 
+                                              th:utext="${item} + ${!itemStat.last ? '<br>' : ''}"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div id="cloud" class="subject-info">
-                            <div class="couresName">클라우드기반 풀스텍 개발과 빅데이터 분석 서비스 구현을 위한 전문가 양성과정</div>
-                            <div class="courseNameSeparate"></div>
-                            <div class="couresText1">
-                                <strong>"스프링 클라우드를 기반으로 하는 혁신적인 응용 소프트웨어 개발!"</strong>
-                            </div>
-                            <div class="couresText2">웹 개발 기초 기술과 Spring, Spring Boot 프레임워크를 익혀 고급 웹 애플리케이션을
-                                개발하며, AWS, Azure, Google Cloud 등 주요 클라우드 플랫폼의 이해와 인프라 관리 능력을 기릅니다. 클라우드 기반
-                                데이터베이스 설계 및 운영, Numpy, Pandas, Matplotlib, Seaborn을 활용한 데이터 분석 및 시각화 능력을 배양하고,
-                                클라우드에서 머신러닝과 딥러닝 모델 개발 능력을 키웁니다. 마지막으로, 실제 문제 해결을 위한 실무 프로젝트를 통해 종합적인 실무 능력을
-                                강화하고, 최신 기술과 경험을 바탕으로 취업 경쟁력을 높일 수 있다.</div>
-                            <div class="couresRoadmap">
-                                <div class="roadmap-container">
-                                    <div class="roadmap-item">
-                                        <div class="month">1개월차</div>
-                                        <div class="content">
-                                            Java<br>
-                                            Web Front
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">2개월차</div>
-                                        <div class="content">
-                                            Oracle DB<br>
-                                            JSP & Servlet
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">3개월차</div>
-                                        <div class="content">
-                                            Spring<br>
-                                            Framework
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">4개월차</div>
-                                        <div class="content">
-                                            머신러닝 & 딥러닝<br>
-                                            Spring Boot
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">5개월차</div>
-                                        <div class="content">
-                                            클라우드 서비스<br>
-                                            실무 프로젝트
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">6개월차</div>
-                                        <div class="content">
-                                            실무 프로젝트
-                                        </div>
-                                    </div>
+                        
+                        <!-- 코스 정보 -->
+                        <div class="courseInfo">
+                            <div class="courseInfoContainer">
+                                <div class="info-box">
+                                    <h2>개강 시기</h2>
+                                    <p th:text="${course.startDate}"></p>
                                 </div>
 
-                            </div>
-                            <div class="courseInfo">
-                                <div class="courseInfoContainer">
-                                    <div class="info-box">
-                                        <h2>개강 시기</h2>
-                                        <p>2025년 03월 18일</p>
-                                    </div>
-
-                                    <div class="info-box">
-                                        <h2>교육 기간</h2>
-                                        <p>6개월 960시간(1일 8교시)</p>
-                                    </div>
-
-                                    <div class="info-box">
-                                        <h2>교육 시간</h2>
-                                        <p>09:00 ~ 17:30(야간 실습실 개방)</p>
-                                    </div>
-
-                                    <div class="info-box">
-                                        <h2>주요 교과</h2>
-                                        <p>주요교과 : JAVA, Python, Web Front, 오라클 DB, JSP&Servlet, Spring Framework, Spring
-                                            Boot 빅데이터 부석도구 활용, 머신러닝+딥러닝, AWS 클라우드 웹서비스, 실무프로젝트</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="benefits">
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">01
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">교육 목표</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            - 자바와 파이썬의 기초와 심화 개념을 학습하여
-                                            <strong>클라우드 환경</strong>에서의 다양한 프로젝트에 활용할 수 있는 능력을 배양한다.
-                                        </li>
-                                        <li>
-                                            - 웹 개발의 기초 기술을 익히고,
-                                            <strong>Spring</strong>과
-                                            <strong>Spring Boot</strong>
-                                            프레임워크를 활용하여 클라우드 환경에 적합한 고급 웹 애플리케이션 개발 능력을 향상시킨다.
-                                        </li>
-                                        <li>
-                                            -
-                                            <strong>AWS</strong>,
-                                            <strong>Azure</strong>,
-                                            <strong>Google Cloud</strong>
-                                            등 주요 클라우드 플랫폼의 개념과 기술을 이해하고, 클라우드 인프라를 구축하고 관리하는 능력을 기른다.
-                                        </li>
-                                        <li>
-                                            - 클라우드 기반
-                                            <strong>데이터베이스</strong>의 설계, 구축, 운영에 대한 실무적인 능력을 배양하여 다양한 데이터 관리 요구에 대응할 수 있다.
-                                        </li>
-                                        <li>
-                                            -
-                                            <strong>Numpy</strong>,
-                                            <strong>Pandas</strong>,
-                                            <strong>Matplotlib</strong>,
-                                            <strong>Seaborn</strong>
-                                            등 다양한 빅데이터 분석 도구를 활용하여 클라우드 환경에서 데이터를 수집, 분석, 시각화하는 능력을 함양한다.
-                                        </li>
-                                        <li>
-                                            - 클라우드 기반
-                                            <strong>머신러닝</strong>과
-                                            <strong>딥러닝</strong>의 이론과 실습을 통해 AI 기반의 데이터 분석 및 예측 모델을 개발할 수 있는 능력을 기른다.
-                                        </li>
-                                        <li>
-                                            - 클라우드 환경에서 실제 현업의 문제를 해결하는
-                                            <strong>실무 프로젝트</strong>를 수행함으로써 학습한 기술들을 종합적으로 활용하고, 실무 능력을 강화한다.
-                                        </li>
-                                        <li>
-                                            - 최신 클라우드 기술과 실무 프로젝트 경험을 바탕으로 취업 시장에서의 경쟁력을 강화하고, 기업이 요구하는
-                                            <strong>클라우드 기반의 실무형 인재</strong>로 성장한다.
-                                        </li>
-                                    </ul>
+                                <div class="info-box">
+                                    <h2>교육 기간</h2>
+                                    <p th:text="${course.duration}"></p>
                                 </div>
 
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">02
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">교육 시설</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            -
-                                            <strong>전용 강의실, 휴게실</strong>
-                                            등 쾌적한 교육 인프라 제공</li>
-                                        <li>
-
-                                            -
-                                            <strong>방과 후 실습실 개방</strong>
-                                            (22:00까지)
-                                            <ul>
-                                                <li>개인 보충 학습</li>
-                                                <li>정보처리기사 대비 특강</li>
-                                                <li>팀 프로젝트 지도</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-
-                                            -
-                                            <strong>최신 장비</strong>: Intel i5, 8G RAM, 1TB HDD, Geforce GTX 760, 27인치 모니터</li>
-                                    </ul>
+                                <div class="info-box">
+                                    <h2>교육 시간</h2>
+                                    <p>09:00 ~ 17:30(야간 실습실 개방)</p>
                                 </div>
 
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">03
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">프로젝트 중심 학습</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            - 현업 실무 프로젝트 또는 팀별 프로젝트 과제 선정 및 수행
-                                            <ul>
-                                                <li>기업 실무 프로젝트 주제 선정, 실무자 기술 멘토 참여</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-
-                                            -
-                                            <strong>프로젝트 발표</strong>: 기획, 분석, 설계, 구현, 테스트, 배포 결과 발표로 실무 능력 검증
-                                            <ul>
-                                                <li>현업 실무 기술 멘토 참여</li>
-                                                <li>자기 주도적 학습 능력 배양, 포트폴리오 제작</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <div class="info-box">
+                                    <h2>주요 교과</h2>
+                                    <p>
+                                        주요교과 : 
+                                        <span th:each="subject, subjectStat : ${course.subjects}" 
+                                              th:text="${subject} + ${!subjectStat.last ? ', ' : ''}"></span>
+                                    </p>
                                 </div>
-
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">04
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">취업 지원</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            -
-                                            <strong>면접 클리닉</strong>: 이력서 작성법, 면접 요령, 커뮤니케이션 스킬 습득</li>
-                                        <li>
-
-                                            - 대전, 세종, 수도권 관련 기업과 산학 채용 네트워크 구축,
-                                            <strong>취업 연계</strong>
-                                        </li>
-                                    </ul>
-                                    <div class="itButtons">
-
-                                        <a th:href="@{/pages/regApp}" class="detail-link itButton1">
-                                            온라인접수
-                                            <i class="fa fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
-
-                        <div id="sw" class="subject-info">
-                            <div class="couresName">풀 스텍 SW 엔지니어링&디지털 트랜스포메이션 과정</div>
-                            <div class="courseNameSeparate"></div>
-                            <div class="couresText1">
-                                <strong>"미래를 위한 기술과 창의력을 키우는 여정에 함께하세요!"</strong>
+                        
+                        <!-- 혜택 정보 -->
+                        <div class="benefits">
+                            <div class="benefit-group">
+                                <div class="courseIn">
+                                    <div class="courseNum">01</div>
+                                    <div class="separate"></div>
+                                    <div class="courseInName">교육 목표</div>
+                                </div>
+                                <ul>
+                                    <li th:each="goal : ${course.educationalGoals}" 
+                                        th:text="'- ' + ${goal}"></li>
+                                </ul>
                             </div>
-                            <div class="couresText2">소프트웨어 산업은 새로운 기술 동향은 여러분야에서 클라우드 네이티브 및 서버리스 아키텍처, 인공지능 및 기계학습, 컨테이너 기술과 쿠버네티스의 확산, 사이버 보안 강화, 개발자 경험의 개선, 언어 및 프레임워크의 다양성, 저 코드 및 노 코드 트렌드, 그리고 분산 원장 기술의 도입, 소프트웨어 개발 방법론 등이 주요 동향으로 나타나고 있으며 기업의 요구사항도 다양하게 요구되고 있습니다. 현재 시급하게 요구되는 기술들을 우선하여 교육과정을 설계하고 우수한 인력을 양성하고자 한다.</div>
-                            <div class="couresRoadmap">
-                                <div class="roadmap-container">
-                                    <div class="roadmap-item">
-                                        <div class="month">1개월차</div>
-                                        <div class="content">
-                                            Java<br>
-                                            JSP&Servlet<br>
-                                            데이터베이스
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">2개월차</div>
-                                        <div class="content">
-                                            Spring Framework<br>
-                                            MSA 컴포넌트
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">3개월차</div>
-                                        <div class="content">
-                                            
-                                            Python<br/>
-                                            Web Scraping
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">4개월차</div>
-                                        <div class="content">
-                                            SpringBoot<br>
-                                            React<br>
-                                            빅데이터 처리 분석
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">5개월차</div>
-                                        <div class="content">
-                                             분석결과 시각화<br/>
-                                            리눅스서버<br/>
-                                            하둡시스템
-                                        </div>
-                                    </div>
-                                    <div class="roadmap-item">
-                                        <div class="month">6개월차</div>
-                                        <div class="content">
-                                            실무 팀 프로젝트<br>
-                                        </div>
-                                    </div>
-                                </div>
 
+                            <div class="benefit-group">
+                                <div class="courseIn">
+                                    <div class="courseNum">02</div>
+                                    <div class="separate"></div>
+                                    <div class="courseInName">교육 시설</div>
+                                </div>
+                                <ul>
+                                    <li>- <strong>전용 강의실, 휴게실</strong> 등 쾌적한 교육 인프라 제공</li>
+                                    <li>- <strong>방과 후 실습실 개방</strong> (22:00까지)
+                                        <ul>
+                                            <li>개인 보충 학습</li>
+                                            <li>정보처리기사 대비 특강</li>
+                                            <li>팀 프로젝트 지도</li>
+                                        </ul>
+                                    </li>
+                                    <li>- <strong>최신 장비</strong>: Intel i5, 8G RAM, 1TB HDD, Geforce GTX 760, 27인치 모니터</li>
+                                </ul>
                             </div>
-                            <div class="courseInfo">
-                                <div class="courseInfoContainer">
-                                    <div class="info-box">
-                                        <h2>개강 시기</h2>
-                                        <p>2025년 03월 18일</p>
-                                    </div>
 
-                                    <div class="info-box">
-                                        <h2>교육 기간</h2>
-                                        <p>6개월 960시간(1일 8교시)</p>
-                                    </div>
-
-                                    <div class="info-box">
-                                        <h2>교육 시간</h2>
-                                        <p>09:00 ~ 17:30(야간 실습실 개방)</p>
-                                    </div>
-
-                                    <div class="info-box">
-                                        <h2>주요 교과</h2>
-                                        <p>주요교과 : JAVA, Python, Web Front, JSP&Servlet, Spring Framework, SpringBoot, 파이썬 활용 크롤링, BigData 처리, 분석, 시각화, ORACLE DB, 클라우드 캄퓨팅, 머신러닝&딥러닝, 애자일&데브옵스, 실무프로젝트</p>
-                                    </div>
+                            <div class="benefit-group">
+                                <div class="courseIn">
+                                    <div class="courseNum">03</div>
+                                    <div class="separate"></div>
+                                    <div class="courseInName">프로젝트 중심 학습</div>
                                 </div>
+                                <ul>
+                                    <li>- 현업 실무 프로젝트 또는 팀별 프로젝트 과제 선정 및 수행
+                                        <ul>
+                                            <li>기업 실무 프로젝트 주제 선정, 실무자 기술 멘토 참여</li>
+                                        </ul>
+                                    </li>
+                                    <li>- <strong>프로젝트 발표</strong>: 기획, 분석, 설계, 구현, 테스트, 배포 결과 발표로 실무 능력 검증
+                                        <ul>
+                                            <li>현업 실무 기술 멘토 참여</li>
+                                            <li>자기 주도적 학습 능력 배양, 포트폴리오 제작</li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="benefits">
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">01
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">교육 목표</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            - 다양한 프로그래밍 언어를 사용하여 기본적인 프로그래밍 개념을 이해하고 간단한 알고리즘과 데이터 구조를 구현할 수 있다.
-                                        </li>
-                                        <li>
-                                            - 모던 프론트엔드 및 백엔드 프레임워크를 사용하여 웹 어플리케이션을 설계, 구축 및 유지보수할 수 있다.
-                                        </li>
-                                        <li>
-                                            - 대표적인
-                                            <strong>클라우드 플랫폼</strong>을 사용하여 어플리케이션을 배포하고 관리하는 능력을 개발할 수 있다.
-                                        </li>
-                                        <li>
-                                            - 효과적인
-                                            <strong>데이터베이스 설계</strong>와 운영을 수행할 수 있다.
-                                        </li>
-                                        <li>
-                                            - 주요
-                                            <strong>빅데이터 분석 도구</strong>를 사용하여 데이터를 처리하고 분석할 수 있다.
-                                        </li>
-                                        <li>
-                                            -
-                                            <strong>인공지능</strong> 및
-                                            <strong>기계학습</strong>의 기본 개념을 이해하고 간단한 모델을 만들 수 있다.
-                                        </li>
-                                        <li>
-                                            - 주요
-                                            <strong>머신러닝 라이브러리</strong>를 사용하여 모델을 개발하고 평가할 수 있다.
-                                        </li>
-                                        <li>
-                                            - 효과적인
-                                            <strong>테스트 전략</strong>을 수립하고 애플리케이션을 효과적으로 관리할 수 있다.
-                                        </li>
-                                        <li>
-                                            -
-                                            <strong>애자일</strong>과
-                                            <strong>데브옵스</strong>을 통해 기업이나 조직이 소프트웨어 개발 및 배포 과정에서 민첩성과 효율성을 향상시키고, 빠르게 변화하는 비즈니스 환경에<br> 대응할 수 있도록 할 수 있다.
-                                        </li>
-                                        <li>
-                                            -
-                                            <strong>팀 프로젝트</strong>를 통해 실제 업무 환경에서의 문제 해결과 협업 능력을 개발할 수 있다.
-                                        </li>
-                                    </ul>
+
+                            <div class="benefit-group">
+                                <div class="courseIn">
+                                    <div class="courseNum">04</div>
+                                    <div class="separate"></div>
+                                    <div class="courseInName">취업 지원</div>
                                 </div>
-
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">02
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">교육 시설</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            -
-                                            <strong>전용 강의실, 휴게실</strong>
-                                            등 쾌적한 교육 인프라 제공</li>
-                                        <li>
-
-                                            -
-                                            <strong>방과 후 실습실 개방</strong>
-                                            (22:00까지)
-                                            <ul>
-                                                <li>개인 보충 학습</li>
-                                                <li>정보처리기사 대비 특강</li>
-                                                <li>팀 프로젝트 지도</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-
-                                            -
-                                            <strong>최신 장비</strong>: Intel i5, 8G RAM, 1TB HDD, Geforce GTX 760, 27인치 모니터</li>
-                                    </ul>
+                                <ul>
+                                    <li>- <strong>면접 클리닉</strong>: 이력서 작성법, 면접 요령, 커뮤니케이션 스킬 습득</li>
+                                    <li>- 대전, 세종, 수도권 관련 기업과 산학 채용 네트워크 구축, <strong>취업 연계</strong></li>
+                                </ul>
+                                <div class="itButtons">
+                                    <a th:href="@{/pages/regApp}" class="detail-link itButton1">
+                                        온라인접수
+                                        <i class="fa fa-arrow-right"></i>
+                                    </a>
                                 </div>
-
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">03
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">프로젝트 중심 학습</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            - 현업 실무 프로젝트 또는 팀별 프로젝트 과제 선정 및 수행
-                                            <ul>
-                                                <li>기업 실무 프로젝트 주제 선정, 실무자 기술 멘토 참여</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-
-                                            -
-                                            <strong>프로젝트 발표</strong>: 기획, 분석, 설계, 구현, 테스트, 배포 결과 발표로 실무 능력 검증
-                                            <ul>
-                                                <li>현업 실무 기술 멘토 참여</li>
-                                                <li>자기 주도적 학습 능력 배양, 포트폴리오 제작</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="benefit-group">
-                                    <div class="courseIn">
-                                        <div class="courseNum">04
-                                        </div>
-                                        <div class="separate"></div>
-                                        <div class="courseInName">취업 지원</div>
-                                    </div>
-                                    <ul>
-                                        <li>
-
-                                            -
-                                            <strong>면접 클리닉</strong>: 이력서 작성법, 면접 요령, 커뮤니케이션 스킬 습득</li>
-                                        <li>
-
-                                            - 대전, 세종, 수도권 관련 기업과 산학 채용 네트워크 구축,
-                                            <strong>취업 연계</strong>
-                                        </li>
-                                    </ul>
-                                    <div class="itButtons">
-
-                                        <a th:href="@{/pages/regApp}" class="detail-link itButton1">
-                                            온라인접수
-                                            <i class="fa fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-            
-        
+        </div>
 
-       	<script th:src="@{/js/course.js}"></script>
+        <script th:src="@{/js/course.js}"></script>
     </body>
-
 </html>

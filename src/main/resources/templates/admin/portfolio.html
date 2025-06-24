@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/adminLayout}" layout:fragment="Content">
+<head>
+    <title>포트폴리오 관리</title>
+    <link rel="stylesheet" th:href="@{/css/portfolio.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>포트폴리오 관리</h1>
+        
+        <!-- 포트폴리오 목록 -->
+        <div class="portfolio-list">
+            <div class="portfolio-item" th:each="portfolio : ${portfolios}">
+                <div class="portfolio-info">
+                    <h3 th:text="${portfolio.title}">포트폴리오 제목</h3>
+                    <p><strong>GitHub:</strong> <a th:href="${portfolio.githubUrl}" target="_blank" th:text="${portfolio.githubUrl}">GitHub URL</a></p>
+                    <p>
+                        <strong>현재 이미지:</strong>
+                        <img th:src="${portfolio.imageUrl}" class="current-image" alt="현재 이미지" onerror="this.style.display='none'">
+                    </p>
+                </div>
+                <div class="portfolio-actions">
+                    <button type="button" class="btn btn-warning" th:onclick="'showEditForm(' + ${portfolio.id} + ')'">수정</button>
+                </div>
+                
+                <!-- 수정 폼 -->
+                <div th:id="'editForm' + ${portfolio.id}" class="edit-form">
+                    <h4>포트폴리오 수정</h4>
+                    <form th:id="'portfolioEditForm' + ${portfolio.id}" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>제목</label>
+                            <input type="text" th:value="${portfolio.title}" class="form-control" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub URL</label>
+                            <input type="url" th:value="${portfolio.githubUrl}" class="form-control" name="githubUrl" required>
+                        </div>
+                        <div class="form-group">
+                            <label>이미지 변경 (선택사항)</label>
+                            <input type="file" class="form-control" name="imageFile" accept="image/*" th:onchange="'previewImage(this, ' + ${portfolio.id} + ')'">
+                            <input type="hidden" th:value="${portfolio.imageUrl}" name="imageUrl">
+                            <img th:id="'imagePreview' + ${portfolio.id}" th:src="${portfolio.imageUrl}" class="image-preview" alt="이미지 미리보기">
+                        </div>
+                        <div class="btn-container">
+                            <button type="button" class="btn btn-secondary" th:onclick="'hideEditForm(' + ${portfolio.id} + ')'">취소</button>
+                            <button type="submit" class="btn btn-primary">저장</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/portfolio.js}"></script>
+</body>
+</html>

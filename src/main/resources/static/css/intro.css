@@ -14,7 +14,7 @@
     color: #333;
     padding-bottom: 45px;
 }
-.introGreSeparate {
+/* .introGreSeparate {
     content: '';
     width: 145px;
     height: 2px;
@@ -25,7 +25,7 @@
     margin-left: auto;
     margin-right: auto;
 
-}
+} */
 .introGreText {
     width: 80%;
     margin: 0 auto;
@@ -355,7 +355,7 @@
     }
 }
 
-.wrap > .mapTop {
+.wrap > .vision {
     background-color: #ffffff;
     font-family: "Roboto", "Noto Sans KR", sans-serif;
     font-weight: 500;
@@ -368,13 +368,39 @@
     color: #333;
     padding-bottom: 45px;
 }
-.wrap > .mapTop > span {
+/* .wrap > .vision > span {
     color: #4CAF50;
+} */
+
+.vision-image {
+    width: 50%;
+    height: 1200px;  
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-bottom: 40px;
 }
 
-.wrap > .mapInfo {
-    background-color: #ffffff;
-    height: 600px;
-    width: 100%;
-    flex-grow: 1;
+/* 반응형 */
+@media (max-width: 1024px) {
+    .vision-image {
+        width: 70%;
+        height: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .vision-image {
+        width: 90%;
+        height: 600px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .vision-image {
+        width: 95%;
+        height: 500px;  
+    }
 }

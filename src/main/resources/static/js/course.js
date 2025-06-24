@@ -1,63 +1,30 @@
-$(document).ready(function () {
-       
-             
-       
-               
-       
-               if ($(window).width() <= 1070 && $("nav").is(":visible")) {
-                   $("body").css("overflow", "hidden");
-               }
-       
-       
-       
-               // URL에서 파라미터 가져오기 (예: ?tab=bigdata)
-               function getParameterByName(name, url = window.location.href) {
-                   name = name.replace(/[\[\]]/g, '\\$&');
-                   var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                       results = regex.exec(url);
-                   if (!results) return null;
-                   if (!results[2]) return '';
-                   return decodeURIComponent(results[2].replace(/\+/g, ' '));
-               }
-       
-               // 활성화할 탭 가져오기
-               let activeTab = getParameterByName('tab');
-       
-               // 탭과 내용 요소 선택
-               const subjectTabs = document.querySelectorAll('.subject-tab');
-               const subjectInfos = document.querySelectorAll('.subject-info');
-       
-               // 탭 클릭 이벤트 핸들러 (기존 로직 유지)
-               subjectTabs.forEach(tab => {
-                   tab.addEventListener('click', () => {
-                       subjectTabs.forEach(t => t.classList.remove('active'));
-                       subjectInfos.forEach(s => s.classList.remove('active'));
-                       tab.classList.add('active');
-                       const subjectId = tab.dataset.subject;
-                       document.getElementById(subjectId).classList.add('active');
-                   });
-               });
-       
-       
-               // URL 파라미터에 따라 탭 활성화, 파라미터가 없으면 첫번째 탭 활성화.
-               if (activeTab) {
-                   subjectTabs.forEach(tab => {
-                       if (tab.dataset.subject === activeTab) {
-                           tab.classList.add('active');
-                           document.getElementById(activeTab).classList.add('active');
-                       } else {
-                           tab.classList.remove('active');
-                           if (document.getElementById(tab.dataset.subject)) { // 해당 id를 가진 요소가 존재하는지 확인
-                             document.getElementById(tab.dataset.subject).classList.remove('active');
-                           }
-                       }
-                   });
-               } else {
-                   // 파라미터가 없을경우, 첫번째 탭 활성화
-                   if(subjectTabs.length > 0) { //0보다 클때만 실행
-                       subjectTabs[0].classList.add('active');
-                       subjectInfos[0].classList.add('active');
-                   }
-       
-               }
-           });
+
+const courseDetails = /*[[${courseDetails}]]*/ [];
+const selectedCourseId = /*[[${selectedCourseId}]]*/ null;
+
+console.log('courseDetails:', courseDetails);
+console.log('selectedCourseId:', selectedCourseId);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.subject-tab');
+    const contents = document.querySelectorAll('.subject-info');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-subject');
+            
+            // 모든 탭에서 active 클래스 제거
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // 클릭된 탭과 해당 콘텐츠에 active 클래스 추가
+            this.classList.add('active');
+            document.getElementById(targetId).classList.add('active');
+            
+            // URL 업데이트
+            const courseId = targetId.replace('course', '');
+            const newUrl = window.location.pathname + '?courseId=' + courseId;
+            history.replaceState(null, '', newUrl);
+        });
+    });
+});

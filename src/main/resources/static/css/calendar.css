@@ -166,7 +166,7 @@ border: 1px solid var(--border);
 height: 130px;
 vertical-align: top;
 transition: var(--transition);
-width: 14.285%; /* 7일로 균등하게 분할 */
+width: 14.285%; 
 position: relative;
 }
 

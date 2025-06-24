@@ -2,15 +2,25 @@ spring:
   application:
     name: djit
   datasource:
-    url: jdbc:mysql://localhost:3306/djit
+    url: jdbc:mysql://152.67.207.90:3306/djit
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 12345
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
   thymeleaf:
     cache: false
 server:
   port: 8090
+file:
+  upload:
+    path: ${UPLOAD_PATH:/home/ubuntu/djit/uploads/}
+app:
+  admin:
+    username: ${ADMIN_USERNAME}
+    password: ${ADMIN_PASSWORD}
+  google:
+    maps:
+      api-key: ${GOOGLE_MAPS_API_KEY}

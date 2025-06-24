@@ -6,13 +6,19 @@ import com.djit.dto.admin.ApplicationSummaryDto;
 import com.djit.dto.admin.CalendarDto;
 import com.djit.dto.admin.ConsultationDto;
 import com.djit.dto.admin.ConsultationResponseDto;
+import com.djit.dto.admin.CourseDetailDto;
 import com.djit.dto.admin.CourseDto;
+import com.djit.dto.admin.PortfolioDto;
 import com.djit.dto.client.ApplicationModifyDto;
 import com.djit.entity.Application;
 import com.djit.entity.Consultation;
+import com.djit.entity.Course;
+import com.djit.entity.Portfolio;
 import com.djit.repository.application.ApplicationRepository;
 import com.djit.repository.application.ConsultationRepository;
 import com.djit.repository.application.CourseRepository;
+import com.djit.repository.application.PortfolioRepository;
+import com.djit.service.FileUploadService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,7 +48,9 @@ public class AdminServiceImpl implements AdminService {
 	private final ApplicationRepository applicationRepository;
 	private final ConsultationRepository counsultationRepository;
 	private final CourseRepository courseRepository;
+	private final PortfolioRepository portfolioRepository;
 	private final ModelMapper modelMapper;
+	private final FileUploadService fileUploadService; 
 
 	@Override
 	@Transactional(readOnly = true)
@@ -125,11 +133,12 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional(readOnly = true)
 	public List<CourseDto> getCourses() {
 		LOGGER.info("코스 조회 서비스 호출");
-		List<CourseDto> courses = courseRepository.findAll().stream()
+		List<CourseDto> courses = courseRepository.findAllWithSubjects().stream()
 				.map(course -> modelMapper.map(course, CourseDto.class)).collect(Collectors.toList());
 		return courses;
 	}
 
+	@Override
 	public CalendarDto generateCalendarData(Integer year, Integer month) {
 	    LocalDate today = LocalDate.now();
 	    if (year == null)
@@ -163,6 +172,76 @@ public class AdminServiceImpl implements AdminService {
 			.consultations(consultations)
 	        .build();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public CourseDetailDto getCourseDetailById(Long id) {
+		LOGGER.info("코스 상세 조회 서비스 호출: " + id);
+		Course course = courseRepository.findById(id)
+			.orElseThrow(() -> new RuntimeException("ID " + id + "에 해당하는 Course를 찾을 수 없습니다."));
+		
+		CourseDetailDto courseDetailDto = modelMapper.map(course, CourseDetailDto.class);
+		return courseDetailDto;
+	}
+
+	@Override
+	@Transactional
+	public void updateCourseDetail(CourseDetailDto courseDetailDto) {
+		LOGGER.info("코스 상세 수정 서비스 호출: " + courseDetailDto.getId());
+		Course course = courseRepository.findById(courseDetailDto.getId())
+			.orElseThrow(() -> new RuntimeException("ID " + courseDetailDto.getId() + "에 해당하는 Course를 찾을 수 없습니다."));
+		
+		modelMapper.map(courseDetailDto, course);
+		courseRepository.save(course);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<PortfolioDto> getAllPortfolios() {
+		List<Portfolio> portfolios = portfolioRepository.findAllByOrderByIdAsc();
+		return portfolios.stream()
+			.map(portfolio -> modelMapper.map(portfolio, PortfolioDto.class))
+			.toList();
+	}
+
+	@Override
+	@Transactional
+	public void updatePortfolio(PortfolioDto portfolioDto) {
+		LOGGER.info("포트폴리오 업데이트: {}", portfolioDto.getId());
+		Portfolio portfolio = portfolioRepository.findById(portfolioDto.getId())
+			.orElseThrow(() -> new RuntimeException("포트폴리오를 찾을 수 없습니다: " + portfolioDto.getId()));
+
+		String oldImageUrl = portfolio.getImageUrl();
+
+		if (portfolioDto.getImageFile() != null && !portfolioDto.getImageFile().isEmpty()) {
+			try {
+				String newImageUrl = fileUploadService.uploadImage(portfolioDto.getImageFile(), "portfolio");
+				portfolio.setImageUrl(newImageUrl);
+				if (oldImageUrl != null) {
+					fileUploadService.deleteFile(oldImageUrl);
+					LOGGER.info("기존 이미지 삭제: {}", oldImageUrl);
+				}
+				
+				LOGGER.info("새 이미지 업로드 완료: {}", newImageUrl);
+			} catch (Exception e) {
+				LOGGER.error("이미지 처리 실패: {}", e.getMessage());
+				throw new RuntimeException("이미지 처리 중 오류가 발생했습니다: " + e.getMessage());
+			}
+		}
+			
+		
+		portfolio.setTitle(portfolioDto.getTitle());
+		portfolio.setGithubUrl(portfolioDto.getGithubUrl());
+		
+		portfolio.setUpdatedAt(LocalDateTime.now());
+		
+		portfolioRepository.save(portfolio);
+	}
+
+
+
+
+
 
 	private List<List<CalendarDay>> generateCalendar(YearMonth yearMonth, LocalDate today) {
 		List<List<CalendarDay>> calendar = new ArrayList<>();

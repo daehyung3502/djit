@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{/layouts/adminLayout}" layout:fragment="Content">
+    layout:decorate="~{layouts/adminLayout}" layout:fragment="Content">
 <head>
     <title>캘린더</title>
     <link rel="stylesheet" th:href="@{/css/calendar.css}">
@@ -23,7 +23,7 @@
                             th:text="${month} + '월'"
                             th:selected="${month == calendarData.selectedMonth}"></option>
                 </select>
-                <button type="submit" class="btn btn-secondary">조회</button>
+                <button type="submit" class="btn btn-primary">조회</button>
             </form>
 
             <div>

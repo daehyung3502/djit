@@ -8,7 +8,7 @@
                 justify-content: center;
                 align-items: center;
                 min-height: 100vh;
-                width: 90%; /* Use percentage instead of max-width */
+                width: 90%; 
                 background-color: white;
                 border-radius: 20px;
                 text-align: center;
@@ -43,7 +43,7 @@
             position: relative;
         }
         
-        /* Central hub styling */
+      
         .feature-grid:before {
             content: '';
             position: absolute;
@@ -58,7 +58,7 @@
             box-shadow: 0 0 0 8px rgba(52, 152, 219, 0.2);
         }
         
-        /* Connecting lines */
+      
         .feature {
             background-color: #f8f9fa;
             border-radius: 15px;
@@ -76,7 +76,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
-        /* Connection lines for first row */
+       
         .feature-top:after {
             content: '';
             position: absolute;
@@ -87,7 +87,7 @@
             background: linear-gradient(to bottom, #4CAF50, transparent);
         }
         
-        /* Connection lines for second row */
+       
         .feature-bottom:after {
             content: '';
             position: absolute;
@@ -98,7 +98,7 @@
             background: linear-gradient(to top, #4CAF50, transparent);
         }
         
-        /* Horizontal connection lines */
+       
         .feature-left:before {
             content: '';
             position: absolute;
@@ -156,7 +156,6 @@
             width: 50px;
         }
         
-        /* Animation for hover effect */
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
@@ -167,7 +166,7 @@
             animation: pulse 1.5s infinite;
         }
         
-        /* Make feature grid responsive */
+       
         @media (min-width: 1200px) {
             .container {
                 width: 95%;

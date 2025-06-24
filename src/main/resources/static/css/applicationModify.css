@@ -214,7 +214,7 @@ body {
     background-color: var(--danger-hover);
 }
 
-/* Modal styling */
+
 .modal {
     display: none;
     position: fixed;

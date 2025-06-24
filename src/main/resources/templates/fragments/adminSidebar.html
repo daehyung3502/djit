@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:fragment="SidebarFragment">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="SidebarFragment">
     <link rel="stylesheet" th:href="@{/css/adminSidebar.css}">
-    <aside class="sidebar" id="sidebar" >
+    <aside class="sidebar" id="sidebar"  >
         <nav>
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item">
@@ -19,18 +19,38 @@
                         <i class="fas fa-graduation-cap"></i> 교육과정 수정
                     </a>
                 </li>
+                <li class="sidebar-nav-item">
+                    <a href="/admin/portfolio" class="sidebar-nav-link" >
+                        <i class="fas fa-folder-open"></i> 포트폴리오 수정
+                    </a>
+                </li>
             </ul>
         </nav>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const currentPath = window.location.pathname;
                 const menuLinks = document.querySelectorAll('.sidebar-nav-link');
-                
-                menuLinks.forEach(link => {
-                    if (link.getAttribute('href') !== '#' && currentPath.includes(link.getAttribute('href'))) {
-                        link.classList.add('active');
-                    }
+
+       
+                    menuLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href === '/admin/list') {
+                            const applicantRelatedPaths = [
+                                '/admin/list', 
+                                '/admin/applicationDetail', 
+                                '/admin/applicationModify'
+                            ]; const isApplicantPage = applicantRelatedPaths.some(path => currentPath.startsWith(path));
+                            
+                            if (isApplicantPage) {
+                                link.classList.add('active'); 
+                            }
+                        } else {
+                            if (href !== '#' && currentPath.startsWith(href)) {
+                                link.classList.add('active');
+                            }
+                        } 
                 });
+                
             });
         </script>
     </aside>
