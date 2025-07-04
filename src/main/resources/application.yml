@@ -10,8 +10,11 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 10
   thymeleaf:
-    cache: false
+    cache: true
 server:
   port: 8090
 file:

@@ -193,7 +193,7 @@ border-bottom: 1px dashed #eee;
     color: #1e88e5;
 }
 
-.other-month .day {
+.day.other-month  {
     color: #bdbdbd;
     font-weight: 400;
 }

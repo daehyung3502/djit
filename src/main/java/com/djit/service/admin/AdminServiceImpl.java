@@ -277,7 +277,7 @@ public class AdminServiceImpl implements AdminService {
 			week.add(new CalendarDay(i, true, isToday, dayOfWeekVal));
 
 			
-			if (dayOfWeekVal == 6 || i == daysInMonth) {
+			if (dayOfWeekVal == 6) {
 				calendar.add(week);
 				week = new ArrayList<>();
 			}
@@ -287,7 +287,7 @@ public class AdminServiceImpl implements AdminService {
 		if (!week.isEmpty()) {
 			int count = 7 - week.size();
 			for (int i = 1; i <= count; i++) {
-				int dayOfWeekVal = (dayOfWeekValue + daysInMonth + i - 1) % 7;
+				int dayOfWeekVal = (week.size() + i - 1) % 7;
 				week.add(new CalendarDay(i, false, false, dayOfWeekVal));
 			}
 			calendar.add(week);
