@@ -174,6 +174,7 @@ let myswiper = new Swiper(".mySwiper", {
     },
     
     
-    loop: true 
+    // loop: true 
+    rewind: true
 });
 

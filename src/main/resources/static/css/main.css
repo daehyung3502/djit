@@ -4,7 +4,7 @@
             
             .wrap > .itIntro {
                 color: #333333;
-                background-color: #e9ecef;
+                background-color: #f8f9fa;
                 padding: 40px 0;
                 margin-bottom: 20px;
                 flex-grow: 1;
@@ -651,7 +651,7 @@
                 }
             }
             .wrap > .portfolioTop {
-                background-color: #e9ecef;
+                background-color: #f8f9fa;
                 font-family: "Roboto", "Noto Sans KR", sans-serif;
                 font-weight: 500;
                 font-size: 3rem;
@@ -669,7 +669,7 @@
             }
 
             .wrap > .portfolioInfo {
-                background-color: #e9ecef;
+                background-color: #f8f9fa;
                 height: 480px;
                 flex-grow: 1;
                 justify-content: center;
@@ -767,7 +767,7 @@
 
             .swiper-pagination-bullet:hover {
                 transform: scale(1.1);
-                background-color: #999;
+                background-color: #367c39;
                 box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
             }
 

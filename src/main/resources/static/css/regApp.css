@@ -1,98 +1,206 @@
-   .form-container {
-            background-color: white;
-            font-family: sans-serif; 
-            line-height: 1.6;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 800px; 
-            margin: 0 auto;  
-        }
 
-        .form-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-        }
+:root {
+    --primary-color: #4CAF50; 
+    --primary-color-dark: #367c39; 
+    --primary-color-light: rgba(47, 133, 90, 0.15); 
+    --border-color: #dcdfe6;
+    --text-color: #2d3748; 
+    --label-color: #4a5568;
+    --bg-color: #f7fafc; 
+    --form-bg-color: #ffffff;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-        }
 
-        .form-label {
-            display: block; 
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
-       input[type="text"],
-       input[type="email"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        textarea:focus, select:focus
-        {
-            border-color:#9370DB;
-            outline:none;
-        }
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+}
 
 
 
-        .radio-group {
-            display: flex;
-            align-items: center;
-            gap: 10px; 
-        }
-        .radio-group input[type="radio"]
-        {
-            margin-right:5px;
-            transform:scale(0.8);
-        }
 
-        
-        select {
-            appearance: none; 
-            -webkit-appearance: none; 
-            -moz-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Custom dropdown arrow */
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 16px;
-            padding-right: 30px; 
-            cursor:pointer;
-        }
-        
+.form-container {
+    background-color: var(--form-bg-color);
+    padding: 40px 50px;
+    border-radius: 12px;
+    max-width: 800px; 
+    margin: 50px auto;  
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
 
-       
-        textarea {
-            resize: vertical; 
-            min-height: 100px; 
-        }
-        
-         
-        .submit-button{
-            width:100%;
-            padding:12px;
-            background-color:#4CAF50;
-            color:white;
-            border:none;
-            cursor:pointer;
-            border-radius:4px;
-            transition: background-color 0.3s ease;
-            font-size:18px;
-        }
-        .submit-button:hover{
-             background-color:#367c39;
-        }
-        .required-asterisk
-        {
-            color:red;
-        }
+.form-title h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--text-color);
+    font-size: 28px;
+    font-weight: 600;
+}
+
+
+
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block; 
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--label-color);
+}
+
+
+.required-asterisk {
+    color: #e53e3e;
+    margin-left: 2px;
+}
+
+
+
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus, 
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-color-light);
+}
+
+
+::placeholder {
+    color: #a0aec0;
+}
+
+
+select {
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a0aec0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 20px;
+    cursor: pointer;
+}
+
+textarea {
+    resize: vertical; 
+    min-height: 120px; 
+}
+
+
+
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.radio-group input[type="radio"] {
+    opacity: 0; 
+    position: absolute;
+    width: 0;
+}
+
+.radio-group label.form-label {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 0;
+    padding-left: 30px;
+}
+
+
+.radio-group label.form-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+
+.radio-group input[type="radio"]:checked + label.form-label::before {
+    border-color: var(--primary-color);
+}
+
+
+.radio-group label.form-label::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+
+.radio-group input[type="radio"]:checked + label.form-label::after {
+    transform: translateY(-50%) scale(1);
+}
+
+
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-button:hover {
+     background-color: var(--primary-color-dark); 
+     transform: translateY(-2px);
+     box-shadow: 0 7px 14px rgba(47, 133, 90, 0.25); 
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}

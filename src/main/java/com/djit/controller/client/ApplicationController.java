@@ -46,7 +46,7 @@ public class ApplicationController {
 
 	    Map<String, Object> response = new HashMap<>();
 	    response.put("message", "접수되었습니다.");
-	    response.put("redirectUrl", "/pages/main");
+	    response.put("redirectUrl", "/");
 	    return ResponseEntity.ok(response);
 	}
 }
